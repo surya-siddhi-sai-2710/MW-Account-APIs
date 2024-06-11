@@ -1,0 +1,20 @@
+{
+  "CMSBulkAccountCreationRequest": {
+    "omniMappedCode": "",
+    "bulkCount": 0,
+    "omniEnglishName": "",
+    "omniArabicName": "",
+    "currency": "",
+    "omniAccountNumber": "",
+    "remitterIdFrom": "",
+    "remitterIdTo": "",
+    "blockedTransactions": "",
+    "userComments": "",
+    "transactionNotificationFlag": "",
+    "debitCreditFlag": "",
+    "minimumAccountBalanceLimit": 0,
+    "maximumAccountBalanceLimit": 0,
+    "subscriptionFlag": "",
+    "accountResetFlag": ""
+  }
+}

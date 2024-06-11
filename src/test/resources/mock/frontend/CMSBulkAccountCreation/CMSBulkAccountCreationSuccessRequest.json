@@ -1,0 +1,20 @@
+{
+  "CMSBulkAccountCreationRequest": {
+    "omniMappedCode": "795176",
+    "bulkCount": 5,
+    "omniEnglishName": "string",
+    "omniArabicName": "string",
+    "currency": "",
+    "omniAccountNumber": "SA5423EsPJnEMMdpdS5pJbFQ",
+    "remitterIdFrom": "string",
+    "remitterIdTo": "string",
+    "blockedTransactions": "string",
+    "userComments": "string",
+    "transactionNotificationFlag": "string",
+    "debitCreditFlag": "string",
+    "minimumAccountBalanceLimit": 0,
+    "maximumAccountBalanceLimit": 0,
+    "subscriptionFlag": "string",
+    "accountResetFlag": "string"
+  }
+}

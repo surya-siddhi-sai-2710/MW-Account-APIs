@@ -1,0 +1,10 @@
+<soapenv:Envelope
+	xmlns:soapenv="
+http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <ns2:processRequestResponse
+			xmlns:ns2="http://web.cse.com/">
+            <return></return>
+        </ns2:processRequestResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
