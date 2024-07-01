@@ -1,0 +1,29 @@
+camel:
+ springboot:
+    name: Middleware-AccountAPIs
+ servlet:
+    mapping:
+      context-path: /*
+ rest:
+    context-path: /
+    
+server:
+  port: 8082
+
+  
+UDDIConnector:
+  host : ${UDDICONNECTOR_HOST}
+  contextPath : ${UDDICONNECTOR_CONTEXTPATH}
+
+ 
+configStoreConnector:
+  apiKeyName: configstore
+  host: ${CONFIGSTORECONNECTOR_HOST}
+  contextPath: ${CONFIGSTORE_CONTEXTPATH} 
+  
+encryption:
+  apiKeyName: encryption_handler
+  secretKey: ${ENCRYPTION_SECRET_KEY}
+
+
+ 

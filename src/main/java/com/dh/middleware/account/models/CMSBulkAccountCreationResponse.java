@@ -13,36 +13,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class CMSBulkAccountCreationResponse {
 
 	@JsonProperty("success")
-    protected CreatedCMSAccountListType success;
+	protected CreatedCMSAccountListType success;
 
-    /**
-     * Gets the value of the success property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CreatedCMSAccountListType }
-     *     
-     */
-    public CreatedCMSAccountListType getSuccess() {
-        return success;
-    }
+	public CreatedCMSAccountListType getSuccess() {
+		return success;
+	}
 
-    /**
-     * Sets the value of the success property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CreatedCMSAccountListType }
-     *     
-     */
-    public void setSuccess(CreatedCMSAccountListType value) {
-        this.success = value;
-    }
+	public void setSuccess(CreatedCMSAccountListType value) {
+		this.success = value;
+	}
 
 	@Override
 	public String toString() {
 		return "CMSBulkAccountCreationResponse [success=" + success + "]";
 	}
 
-    
 }

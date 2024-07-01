@@ -8,24 +8,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "processRequest", propOrder = {"arg0"})
-@XmlRootElement(name = "processRequest")
+@XmlType(name = "processRequest", propOrder = {
+		"arg0"})
+@XmlRootElement(name = "processRequest", namespace = "http://web.cse.com/")
 public class ProcessRequest {
 	
 	@XmlAttribute(name = "logcontexttoken")
     protected String logContextToken;
 
-	@XmlElement(name="arg0", namespace = "")
-	private Arg0 arg0;
-
-	public Arg0 getArg0() {
-		return arg0;
-	}
-
-	public void setArg0(Arg0 arg0) {
-		this.arg0 = arg0;
-	}
-
+	protected CseBusinessBean arg0;
 
 	public String getLogContextToken() {
 		return logContextToken;
@@ -35,10 +26,20 @@ public class ProcessRequest {
 		this.logContextToken = logContextToken;
 	}
 
+	public CseBusinessBean getArg0() {
+		return arg0;
+	}
+
+	public void setArg0(CseBusinessBean arg0) {
+		this.arg0 = arg0;
+	}
+
 	@Override
 	public String toString() {
 		return "ProcessRequest [logContextToken=" + logContextToken + ", arg0=" + arg0 + "]";
 	}
+
+	
 	
 	
 }

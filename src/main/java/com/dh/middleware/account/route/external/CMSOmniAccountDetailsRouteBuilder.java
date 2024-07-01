@@ -8,10 +8,11 @@ import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
 import com.dh.middleware.account.models.CMSBulkAccountCreation;
+import com.dh.middleware.account.models.CMSOmniAccountDetails;
 import com.dh.middleware.account.models.backend.cms.ProcessRequest;
 
 @Component
-public class CMSBulkAccountCreationRouteBuilder extends RouteBuilder{
+public class CMSOmniAccountDetailsRouteBuilder extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
@@ -20,35 +21,40 @@ public class CMSBulkAccountCreationRouteBuilder extends RouteBuilder{
 		.bindingMode(RestBindingMode.json);
 
 		rest("/api/accounts")
-		.post("/v1/CMSBulkAccountCreation")
-		.type(CMSBulkAccountCreation.class)
+		.post("/v1/CMSOmniAccountDetails")
+		.type(CMSOmniAccountDetails.class)
 		.consumes("application/json")
 		.produces("application/json")
-		.to("direct:CMSBulkAccountCreation")
-		.outType(CMSBulkAccountCreation.class);
+		.to("direct:CMSOmniAccountDetails")
+		.outType(CMSOmniAccountDetails.class);
 		
 		onException(Exception.class)
-		.to("bean:oUtils?method=onException(${exchange},\"CMSBulkAccountCreationResponse\",${header.system})")
+		.to("bean:oUtils?method=onException(${exchange},\"CMSOmniAccountDetailsResponse\",${header.system})")
 		.handled(true);
 		
 		JaxbDataFormat getProcessRequest = new JaxbDataFormat();
 		JAXBContext jaxconReq = JAXBContext.newInstance(ProcessRequest.class);
 		getProcessRequest.setContext(jaxconReq);
 		
-		from("direct:CMSBulkAccountCreation").routeId("CMSBulkAccountCreation")
+		from("direct:CMSOmniAccountDetails").routeId("CMSOmniAccountDetails")
 		.streamCaching()
 		.setHeader("system", constant("MW"))
-		.to("bean:CMSBulkAccountCreationService?method=setCMSBulkAccountCreationRequestIn")
-		.to("bean:CMSBulkAccountCreationService?method=processRequest")
-
+		
+		.to("bean:CMSOmniAccountDetailsService?method=setOmniAccountDetailsRequestIn")
+		.to("bean:CMSOmniAccountDetailsService?method=processRequest")
+		.log("${body}")
+		
 		.marshal(getProcessRequest)
 		
-		.setHeader("system", constant("CMS"))
-		.setHeader("SOAPAction", constant("http://com.tcs.bancs.rm/processRequest"))
-
 		.to("{{UDDIConnector.host}}{{UDDIConnector.contextPath}}"+"/cms/v1/ProcessRequest?bridgeEndpoint=true")
-		.to("bean:CMSBulkAccountCreationService?method=prepareXMLResponse")
-		.setHeader("Content-Type",constant("application/json"));
+		
+		.choice()
+			.when().simple("${body} != null")
+				.to("bean:CMSOmniAccountDetailsService?method=prepareXMLResponse")
+				.setHeader("Content-Type",constant("application/json"))
+			.otherwise()
+					.to("bean:oUtils?method=prepareFaultNodeStr(\"CMSOmniAccountDetailsResponse\",\"RECORDNOTFOUND\",\"\",\"\",\"\",\"sysOrAppWithoutBkndError\",${exchange})")
+		.endChoice();
 		
 	}
 }

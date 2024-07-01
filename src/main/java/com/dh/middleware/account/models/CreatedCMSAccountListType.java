@@ -14,14 +14,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class CreatedCMSAccountListType {
 
 	@JsonProperty("account")
-    protected List<CreatedCMSAccountType> account;
+	protected List<CreatedCMSAccountType> account;
 
-    public List<CreatedCMSAccountType> getAccount() {
-        if (account == null) {
-            account = new ArrayList<CreatedCMSAccountType>();
-        }
-        return this.account;
-    }
+	public List<CreatedCMSAccountType> getAccount() {
+		if (account == null) {
+			account = new ArrayList<CreatedCMSAccountType>();
+		}
+		return this.account;
+	}
 
 	public void setAccount(List<CreatedCMSAccountType> account) {
 		this.account = account;

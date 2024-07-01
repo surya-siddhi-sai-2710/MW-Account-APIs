@@ -1,14 +1,12 @@
-package com.dh.middleware.account.utils;
+package com.dh.middleware.account.utility;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AccountUtils {
 
-	private static char delimiter = '\027';
+//	private static char delimiter = '\027';
+	private static char delimiter = '\u0017';
 	
 	  public String getValueFromCMSResponse(String key, String responseString) {
 		    String value = null;

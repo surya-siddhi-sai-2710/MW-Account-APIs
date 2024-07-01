@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.12</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dh.middleware.accounts</groupId>
 	<artifactId>Midddleware-AccountAPIs</artifactId>
@@ -20,6 +20,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
@@ -63,6 +69,10 @@
 			<version>3.18.3</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -127,6 +137,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<!-- caching -->
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -142,6 +165,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<!-- UTILITY DEPENDENCY -->
 		<dependency>
@@ -155,6 +179,12 @@
 			<artifactId>camel-test-spring-junit5</artifactId>
 			<version>3.18.3</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alahli.middleware.connector.http</groupId>
+			<artifactId>Middleware-HttpConnector</artifactId>
+			<version>1.0.1</version>
 		</dependency>
 
 

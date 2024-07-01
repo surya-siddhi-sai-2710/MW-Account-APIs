@@ -10,15 +10,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "arg0", propOrder = {"iNPUTMESSAGE","sERVICEID"})
-@XmlRootElement(name = "arg0", namespace = "")
-public class Arg0 {
+@XmlType(name = "cseBusinessBean", propOrder = {"iNPUTMESSAGE","sERVICEID"})
+@XmlRootElement(name = "arg0", namespace = "http://web.cse.com/")
+public class CseBusinessBean {
 
 	@XmlAttribute(name = "logcontexttoken")
     protected String logContextToken;
 
 	@XmlElement(name = "INPUTMESSAGE")
-    protected InputMessage iNPUTMESSAGE;
+    protected String iNPUTMESSAGE;
 	
 	@XmlElement(name = "SERVICEID")
     protected String sERVICEID;
@@ -31,11 +31,11 @@ public class Arg0 {
 		this.logContextToken = logContextToken;
 	}
 
-	public InputMessage getiNPUTMESSAGE() {
+	public String getiNPUTMESSAGE() {
 		return iNPUTMESSAGE;
 	}
 
-	public void setiNPUTMESSAGE(InputMessage iNPUTMESSAGE) {
+	public void setiNPUTMESSAGE(String iNPUTMESSAGE) {
 		this.iNPUTMESSAGE = iNPUTMESSAGE;
 	}
 
@@ -66,7 +66,7 @@ public class Arg0 {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Arg0 other = (Arg0) obj;
+		CseBusinessBean other = (CseBusinessBean) obj;
 		return Objects.equals(iNPUTMESSAGE, other.iNPUTMESSAGE)
 				&& Objects.equals(logContextToken, other.logContextToken) && Objects.equals(sERVICEID, other.sERVICEID);
 	}

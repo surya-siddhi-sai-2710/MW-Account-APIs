@@ -16,7 +16,8 @@
     <bean class="com.alahli.middleware.utility.Utils.DateUtil" id="oDateUtil"/>
     <bean class="com.alahli.middleware.utility.Utils.NumberUtil" id="oNumberUtil"/>
     <bean class="com.alahli.middleware.utility.Utils.ConfigStoreUtil" id="oConfigStoreUtil"/>
-    <bean class="com.alahli.middleware.utility.encryption.EncryptionHandler" id="oEncryptionHandler"/>
     <bean class="com.alahli.middleware.utility.dao.BancsRegionDao" id="oBancsRegionDao" lazy-init="true"/>
+    
+    
  
 </beans>
