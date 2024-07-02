@@ -42,7 +42,6 @@ public class CMSOmniAccountDetailsRouteBuilder extends RouteBuilder {
 		
 		.to("bean:CMSOmniAccountDetailsService?method=setOmniAccountDetailsRequestIn")
 		.to("bean:CMSOmniAccountDetailsService?method=processRequest")
-		.log("${body}")
 		
 		.marshal(getProcessRequest)
 		
