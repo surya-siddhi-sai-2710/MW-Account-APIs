@@ -46,7 +46,9 @@ public class CMSBulkAccountCreationRouteBuilder extends RouteBuilder{
 		.setHeader("system", constant("CMS"))
 		.setHeader("SOAPAction", constant("http://com.tcs.bancs.rm/processRequest"))
 
+		.log("${body}")
 		.to("{{UDDIConnector.host}}{{UDDIConnector.contextPath}}"+"/cms/v1/ProcessRequest?bridgeEndpoint=true")
+		
 		.to("bean:CMSBulkAccountCreationService?method=prepareXMLResponse")
 		.setHeader("Content-Type",constant("application/json"));
 		

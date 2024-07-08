@@ -45,10 +45,12 @@ public class CMSOmniAccountDetailsRouteBuilder extends RouteBuilder {
 		
 		.marshal(getProcessRequest)
 		
+		.log("${body}")
 		.to("{{UDDIConnector.host}}{{UDDIConnector.contextPath}}"+"/cms/v1/ProcessRequest?bridgeEndpoint=true")
 		
 		.choice()
 			.when().simple("${body} != null")
+//			.when(xpath("/Envelope/Body/processRequestResponse/return[contains(text(), 'OMNIDATA') and contains(text(), 'INSTCODE%3A%22NCB%22')]"))
 				.to("bean:CMSOmniAccountDetailsService?method=prepareXMLResponse")
 				.setHeader("Content-Type",constant("application/json"))
 			.otherwise()

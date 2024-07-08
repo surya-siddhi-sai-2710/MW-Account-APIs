@@ -203,8 +203,14 @@ public class CMSOmniAccountDetailsService {
 			  oCmsOmniAccountDetailsResponseType.setAccount(oCMSOmniAccountType);
 		      oCmsOmniAccountDetailsResponse.setSuccess(oCmsOmniAccountDetailsResponseType);
 		      oCMSOmniAccountDetails.setAccountDetailsResponse(oCmsOmniAccountDetailsResponse);
+		      
+		      message.setBody(oCMSOmniAccountDetails);
 		  }
-		  message.setBody(oCMSOmniAccountDetails);
-	  }
-	
-}
+			else {
+				String nativeDescription = oAccountUtils.getValueFromCMSResponse("DESCRIPTION", responseString);
+
+				message.setBody(oUtils.prepareFaultNodeStr("CMSOmniAccountDetailsResponse", "CMS", "", returncode,
+						nativeDescription, "sysOrAppWithBkndError", exchange));
+			}
+		}
+	}

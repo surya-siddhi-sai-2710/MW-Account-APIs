@@ -1,5 +1,5 @@
 {
-  "CMSBulkAccountCreationRequest": {
+  "CMSAccountsRequest": {
     "omniMappedCode": "795176",
     "bulkCount": 5,
     "omniEnglishName": "string",

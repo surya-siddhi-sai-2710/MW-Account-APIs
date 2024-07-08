@@ -158,9 +158,14 @@ public class CMSBulkAccountCreationService {
 			  oBulkAccountCreationResponse.setSuccess(oCMSAccountListType);
 			  oBulkAccountCreation.setAccountCreationResponse(oBulkAccountCreationResponse);
 
+			  message.setBody(oBulkAccountCreation);
+		  }else {
+			  String nativeDescription = oAccountUtils.getValueFromCMSResponse("DESCRIPTION", responseString);
+
+				message.setBody(oUtils.prepareFaultNodeStr("CMSBulkAccountCreationResponse", "CMS", "", returncode,
+						nativeDescription, "sysOrAppWithBkndError", exchange));
 		  }
- 
-		  message.setBody(oBulkAccountCreation);
+
 //		  return oBulkAccountCreation;
 		  
 	  }

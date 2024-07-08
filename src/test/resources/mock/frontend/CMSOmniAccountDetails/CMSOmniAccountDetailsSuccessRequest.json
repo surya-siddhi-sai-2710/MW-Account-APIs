@@ -1,0 +1,7 @@
+{
+  "CMSAccountsRequest": {
+    "omniAccountNumber": "05100004381908",
+    "cifNumber": "string",
+    "transactionNotificationFlag": "string"
+  }
+}

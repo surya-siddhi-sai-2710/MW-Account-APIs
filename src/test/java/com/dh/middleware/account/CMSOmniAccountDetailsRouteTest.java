@@ -24,6 +24,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.dh.middleware.account.models.CMSBulkAccountCreation;
+import com.dh.middleware.account.models.CMSOmniAccountDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
@@ -39,7 +40,8 @@ import com.google.common.io.Resources;
 @PropertySource("classpath:application-test.properties")
 @Configuration
 @ComponentScan("com.dh.middleware.account.*")
-public class CMSBulkAccountCreationRouteTest {
+
+public class CMSOmniAccountDetailsRouteTest {
 
 	@Autowired
 	CamelContext camelContext;
@@ -57,28 +59,28 @@ public class CMSBulkAccountCreationRouteTest {
 	private MockEndpoint configStore;
 	
 	@Test
-	public void cMSBulkAccountCreationSuccessTest() throws Exception {
+	public void cMSOmniAccountDetailsSuccessTest() throws Exception {
 
-		String getCMSBulkAccountRequest = Resources.toString(
-				Resources.getResource("mock/frontend/CMSBulkAccountCreation/CMSBulkAccountCreationSuccessRequest.json"), Charsets.UTF_8);
+		String getCMSOmniAccountRequest = Resources.toString(
+				Resources.getResource("mock/frontend/CMSOmniAccountDetails/CMSOmniAccountDetailsSuccessRequest.json"), Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
 				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
 				Charsets.UTF_8);
 
-		String getCMSBulkAccountResponse = Resources.toString(
-				Resources.getResource("mock/backend/CMSBulkAccountCreation/CMSBulkAccountCreationResponseBknd.xml"), Charsets.UTF_8);
+		String getCMSOmniAccountResponse = Resources.toString(
+				Resources.getResource("mock/backend/CMSOmniAccountDetails/CMSOmniAccountDetailsSuccessResponse.xml"), Charsets.UTF_8);
 
-		AdviceWith.adviceWith(camelContext, "CMSBulkAccountCreation", routeBuilder ->
+		AdviceWith.adviceWith(camelContext, "CMSOmniAccountDetails", routeBuilder ->
 
 		{
-			routeBuilder.replaceFromWith("direct:CMSBulkAccountCreation");
+			routeBuilder.replaceFromWith("direct:CMSOmniAccountDetails");
 		});
 
 		cdmockEndpoint.expectedMessageCount(1);
 		cdmockEndpoint.whenAnyExchangeReceived(new Processor() {
 			public void process(Exchange exchange) throws Exception {
-				exchange.getMessage().setBody(getCMSBulkAccountResponse);
+				exchange.getMessage().setBody(getCMSOmniAccountResponse);
 			}
 		});
 
@@ -91,42 +93,43 @@ public class CMSBulkAccountCreationRouteTest {
 
 		camelContext.start();
 
-		CMSBulkAccountCreation oCMSBulkAccountCreationRequest = objectMapper.readValue(getCMSBulkAccountRequest, CMSBulkAccountCreation.class);
-
+		CMSOmniAccountDetails oCMSOmniAccountDetailsRequest = objectMapper.readValue(getCMSOmniAccountRequest, CMSOmniAccountDetails.class);
+		
 		Map<String, Object> headers = new HashMap<String, Object>();
 		headers.put("ServiceHeader", "{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
 		
-		CMSBulkAccountCreation successResponse = producerTemplate.requestBodyAndHeaders("direct:CMSBulkAccountCreation", 
-				oCMSBulkAccountCreationRequest,  headers, CMSBulkAccountCreation.class);
+		CMSOmniAccountDetails successResponse = producerTemplate.requestBodyAndHeaders("direct:CMSOmniAccountDetails", 
+				oCMSOmniAccountDetailsRequest,  headers, CMSOmniAccountDetails.class);
 
-		System.out.println("CMSBulkAccountCreationResponse " + successResponse.getAccountCreationResponse().getSuccess().getAccount().get(0).getAccountNumber());
+		System.out.println("CMSOmniAccountDetailsResponse " + successResponse.getAccountDetailsResponse().getSuccess().getAccount().get(0).getAccountOwnerType());
 
-		Assertions.assertNotNull(successResponse.getAccountCreationResponse().getSuccess().getAccount().get(0).getAccountNumber());
+		Assertions.assertNotNull(successResponse.getAccountDetailsResponse().getSuccess().getAccount().get(0).getAccountOwnerType());
 	}
 	
 	@Test
-	public void cMSBulkAccountCreationFaultTest() throws Exception {
-
-		String getCMSBulkAccountRequest = Resources.toString(
-				Resources.getResource("mock/frontend/CMSBulkAccountCreation/CMSBulkAccountCreationFaultRequest.json"), Charsets.UTF_8);
+	public void cMSOmniAccountDetailsFaultTest() throws Exception {
+		
+		String getCMSOmniAccountRequest = Resources.toString(
+				Resources.getResource("mock/frontend/CMSOmniAccountDetails/CMSOmniAccountDetailsFaultRequest.json"), Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
 				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
 				Charsets.UTF_8);
 
-		String getCMSBulkAccountResponse = Resources.toString(
-				Resources.getResource("mock/backend/CMSBulkAccountCreation/CMSBulkAccountCreationFaultResponse.xml"), Charsets.UTF_8);
+		String getCMSOmniAccountResponse = Resources.toString(
+				Resources.getResource("mock/backend/CMSOmniAccountDetails/CMSOmniAccountDetailsFaultResponse.xml"), Charsets.UTF_8);
 
-		AdviceWith.adviceWith(camelContext, "CMSBulkAccountCreation", routeBuilder ->
+		AdviceWith.adviceWith(camelContext, "CMSOmniAccountDetails", routeBuilder ->
 
 		{
-			routeBuilder.replaceFromWith("direct:CMSBulkAccountCreation");
+			routeBuilder.replaceFromWith("direct:CMSOmniAccountDetails");
 		});
-
+		
+		
 		cdmockEndpoint.expectedMessageCount(1);
 		cdmockEndpoint.whenAnyExchangeReceived(new Processor() {
 			public void process(Exchange exchange) throws Exception {
-				exchange.getMessage().setBody(getCMSBulkAccountResponse);
+				exchange.getMessage().setBody(getCMSOmniAccountResponse);
 			}
 		});
 
@@ -139,18 +142,18 @@ public class CMSBulkAccountCreationRouteTest {
 
 		camelContext.start();
 
-		CMSBulkAccountCreation oCMSBulkAccountCreationRequest = objectMapper.readValue(getCMSBulkAccountRequest, CMSBulkAccountCreation.class);
+		CMSOmniAccountDetails oCMSOmniAccountDetailsRequest = objectMapper.readValue(getCMSOmniAccountRequest, CMSOmniAccountDetails.class);
 
 		Map<String, Object> headers = new HashMap<String, Object>();
 		headers.put("ServiceHeader", "{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
-
 		
-		String faultResponse = producerTemplate.requestBodyAndHeaders("direct:CMSBulkAccountCreation", 
-				oCMSBulkAccountCreationRequest,  headers, String.class);
-
-
-		System.out.println("CMSBulkAccountCreationResponse " + faultResponse);
 		
+		String faultResponse = producerTemplate.requestBodyAndHeaders("direct:CMSOmniAccountDetails", 
+				oCMSOmniAccountDetailsRequest,  headers, String.class);
 
+
+		System.out.println("CMSOmniAccountDetailsResponse " + faultResponse);
+		
+		Assertions.assertNotNull(faultResponse.contains("fault"));
 	}
 }
