@@ -15,15 +15,13 @@ public class CMSBulkAccountCreationRouteBuilder extends RouteBuilder{
 
 	@Override
 	public void configure() throws Exception {
-		
-		restConfiguration()
-		.bindingMode(RestBindingMode.json);
+
+		restConfiguration().bindingMode(RestBindingMode.json);
 
 		rest("/api/accounts")
 		.post("/v1/CMSBulkAccountCreation")
 		.type(CMSBulkAccountCreation.class)
-		.consumes("application/json")
-		.produces("application/json")
+		.consumes("application/json").produces("application/json")
 		.to("direct:CMSBulkAccountCreation")
 		.outType(CMSBulkAccountCreation.class);
 		
@@ -46,7 +44,6 @@ public class CMSBulkAccountCreationRouteBuilder extends RouteBuilder{
 		.setHeader("system", constant("CMS"))
 		.setHeader("SOAPAction", constant("http://com.tcs.bancs.rm/processRequest"))
 
-		.log("${body}")
 		.to("{{UDDIConnector.host}}{{UDDIConnector.contextPath}}"+"/cms/v1/ProcessRequest?bridgeEndpoint=true")
 		
 		.to("bean:CMSBulkAccountCreationService?method=prepareXMLResponse")

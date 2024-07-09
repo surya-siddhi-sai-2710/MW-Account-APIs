@@ -10,18 +10,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cseBusinessBean", propOrder = {"iNPUTMESSAGE","sERVICEID"})
+@XmlType(name = "cseBusinessBean", propOrder = { "iNPUTMESSAGE", "sERVICEID" })
 @XmlRootElement(name = "arg0", namespace = "http://web.cse.com/")
 public class CseBusinessBean {
 
 	@XmlAttribute(name = "logcontexttoken")
-    protected String logContextToken;
+	protected String logContextToken;
 
 	@XmlElement(name = "INPUTMESSAGE")
-    protected String iNPUTMESSAGE;
-	
+	protected String iNPUTMESSAGE;
+
 	@XmlElement(name = "SERVICEID")
-    protected String sERVICEID;
+	protected String sERVICEID;
 
 	public String getLogContextToken() {
 		return logContextToken;
@@ -70,5 +70,5 @@ public class CseBusinessBean {
 		return Objects.equals(iNPUTMESSAGE, other.iNPUTMESSAGE)
 				&& Objects.equals(logContextToken, other.logContextToken) && Objects.equals(sERVICEID, other.sERVICEID);
 	}
-	
+
 }

@@ -4,7 +4,6 @@ package com.dh.middleware.account.models;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "orderBy",
@@ -14,51 +13,42 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class AllowedTransactionFormatedType {
 
-    protected String orderBy;
-    protected String transactionCode;
-    protected String transactionCodeDescription;
-    protected String isSelected;
+	protected String orderBy;
+	protected String transactionCode;
+	protected String transactionCodeDescription;
+	protected String isSelected;
 
+	public String getOrderBy() {
+		return orderBy;
+	}
 
-    public String getOrderBy() {
-        return orderBy;
-    }
+	public void setOrderBy(String value) {
+		this.orderBy = value;
+	}
 
+	public String getTransactionCode() {
+		return transactionCode;
+	}
 
-    public void setOrderBy(String value) {
-        this.orderBy = value;
-    }
+	public void setTransactionCode(String value) {
+		this.transactionCode = value;
+	}
 
+	public String getTransactionCodeDescription() {
+		return transactionCodeDescription;
+	}
 
-    public String getTransactionCode() {
-        return transactionCode;
-    }
+	public void setTransactionCodeDescription(String value) {
+		this.transactionCodeDescription = value;
+	}
 
+	public String getIsSelected() {
+		return isSelected;
+	}
 
-    public void setTransactionCode(String value) {
-        this.transactionCode = value;
-    }
-
-
-    public String getTransactionCodeDescription() {
-        return transactionCodeDescription;
-    }
-
-
-    public void setTransactionCodeDescription(String value) {
-        this.transactionCodeDescription = value;
-    }
-
-
-    public String getIsSelected() {
-        return isSelected;
-    }
-
-
-    public void setIsSelected(String value) {
-        this.isSelected = value;
-    }
-
+	public void setIsSelected(String value) {
+		this.isSelected = value;
+	}
 
 	@Override
 	public String toString() {
@@ -66,5 +56,4 @@ public class AllowedTransactionFormatedType {
 				+ ", transactionCodeDescription=" + transactionCodeDescription + ", isSelected=" + isSelected + "]";
 	}
 
-    
 }

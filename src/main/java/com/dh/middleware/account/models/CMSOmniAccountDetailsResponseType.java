@@ -11,60 +11,48 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "statusCode",
-    "statusDescription",
-    "notes",
-    "account"
-})
+@JsonPropertyOrder({ "statusCode", "statusDescription", "notes", "account" })
 public class CMSOmniAccountDetailsResponseType {
 
-    public void setAccount(List<CMSOmniAccountDetailsType> account) {
+	protected String statusCode;
+	protected String statusDescription;
+	protected String notes;
+	protected List<CMSOmniAccountDetailsType> account;
+
+	public void setAccount(List<CMSOmniAccountDetailsType> account) {
 		this.account = account;
 	}
 
+	public String getStatusCode() {
+		return statusCode;
+	}
 
-	protected String statusCode;
-    protected String statusDescription;
-    protected String notes;
-    protected List<CMSOmniAccountDetailsType> account;
+	public void setStatusCode(String value) {
+		this.statusCode = value;
+	}
 
-    public String getStatusCode() {
-        return statusCode;
-    }
+	public String getStatusDescription() {
+		return statusDescription;
+	}
 
+	public void setStatusDescription(String value) {
+		this.statusDescription = value;
+	}
 
-    public void setStatusCode(String value) {
-        this.statusCode = value;
-    }
+	public String getNotes() {
+		return notes;
+	}
 
+	public void setNotes(String value) {
+		this.notes = value;
+	}
 
-    public String getStatusDescription() {
-        return statusDescription;
-    }
-
-
-    public void setStatusDescription(String value) {
-        this.statusDescription = value;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-
-    public void setNotes(String value) {
-        this.notes = value;
-    }
-
-    
-    public List<CMSOmniAccountDetailsType> getAccount() {
-        if (account == null) {
-            account = new ArrayList<CMSOmniAccountDetailsType>();
-        }
-        return this.account;
-    }
-
+	public List<CMSOmniAccountDetailsType> getAccount() {
+		if (account == null) {
+			account = new ArrayList<CMSOmniAccountDetailsType>();
+		}
+		return this.account;
+	}
 
 	@Override
 	public String toString() {
@@ -72,5 +60,4 @@ public class CMSOmniAccountDetailsResponseType {
 				+ statusDescription + ", notes=" + notes + ", account=" + account + "]";
 	}
 
-    
 }

@@ -8,505 +8,419 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "loggerContext",
-    "transactionCode",
-    "retryTransaction",
-    "tellerId",
-    "terminalId",
-    "workstationId",
-    "override",
-    "correction",
-    "supervisor",
-    "supervisorId",
-    "overrideCode",
-    "employeeId",
-    "branchId",
-    "functionId",
-    "channelId",
-    "bancsPwd",
-    "languageCode",
-    "authenticationType",
-    "ivrTransactionID"
-})
+@XmlType(name = "", propOrder = { "loggerContext", "transactionCode", "retryTransaction", "tellerId", "terminalId",
+		"workstationId", "override", "correction", "supervisor", "supervisorId", "overrideCode", "employeeId",
+		"branchId", "functionId", "channelId", "bancsPwd", "languageCode", "authenticationType", "ivrTransactionID" })
 @XmlRootElement(name = "ServiceHeader")
 public class ServiceHeader {
 
-    @XmlElement(required = true)
-    protected String loggerContext;
-    @XmlElement(required = true)
-    protected String transactionCode;
-    protected boolean retryTransaction;
-    @XmlElement(required = true)
-    protected String tellerId;
-    @XmlElement(required = true)
-    protected String terminalId;
-    @XmlElement(required = true)
-    protected String workstationId;
-    protected boolean override;
-    @XmlElement(required = true)
-    protected String correction;
-    @XmlElement(required = true)
-    protected String supervisor;
-    @XmlElement(required = true)
-    protected String supervisorId;
-    @XmlElement(required = true)
-    protected String overrideCode;
-    @XmlElement(required = true)
-    protected String employeeId;
-    @XmlElement(required = true)
-    protected String branchId;
-    @XmlElement(required = true)
-    protected String functionId;
-    @XmlElement(required = true)
-    protected String channelId;
-    @XmlElement(required = true)
-    protected String bancsPwd;
-    @XmlElement(required = true)
-    protected String languageCode;
-    @XmlElement(defaultValue = "NONE")
-    protected String authenticationType;
-    @XmlElement(name = "IvrTransactionID")
-    protected String ivrTransactionID;
+	@XmlElement(required = true)
+	protected String loggerContext;
+	@XmlElement(required = true)
+	protected String transactionCode;
+	protected boolean retryTransaction;
+	@XmlElement(required = true)
+	protected String tellerId;
+	@XmlElement(required = true)
+	protected String terminalId;
+	@XmlElement(required = true)
+	protected String workstationId;
+	protected boolean override;
+	@XmlElement(required = true)
+	protected String correction;
+	@XmlElement(required = true)
+	protected String supervisor;
+	@XmlElement(required = true)
+	protected String supervisorId;
+	@XmlElement(required = true)
+	protected String overrideCode;
+	@XmlElement(required = true)
+	protected String employeeId;
+	@XmlElement(required = true)
+	protected String branchId;
+	@XmlElement(required = true)
+	protected String functionId;
+	@XmlElement(required = true)
+	protected String channelId;
+	@XmlElement(required = true)
+	protected String bancsPwd;
+	@XmlElement(required = true)
+	protected String languageCode;
+	@XmlElement(defaultValue = "NONE")
+	protected String authenticationType;
+	@XmlElement(name = "IvrTransactionID")
+	protected String ivrTransactionID;
 
-    /**
-     * Gets the value of the loggerContext property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLoggerContext() {
-        return loggerContext;
-    }
+	/**
+	 * Gets the value of the loggerContext property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getLoggerContext() {
+		return loggerContext;
+	}
 
-    /**
-     * Sets the value of the loggerContext property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLoggerContext(String value) {
-        this.loggerContext = value;
-    }
+	/**
+	 * Sets the value of the loggerContext property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setLoggerContext(String value) {
+		this.loggerContext = value;
+	}
 
-    /**
-     * Gets the value of the transactionCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTransactionCode() {
-        return transactionCode;
-    }
+	/**
+	 * Gets the value of the transactionCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getTransactionCode() {
+		return transactionCode;
+	}
 
-    /**
-     * Sets the value of the transactionCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTransactionCode(String value) {
-        this.transactionCode = value;
-    }
+	/**
+	 * Sets the value of the transactionCode property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setTransactionCode(String value) {
+		this.transactionCode = value;
+	}
 
-    /**
-     * Gets the value of the retryTransaction property.
-     * 
-     */
-    public boolean isRetryTransaction() {
-        return retryTransaction;
-    }
+	/**
+	 * Gets the value of the retryTransaction property.
+	 * 
+	 */
+	public boolean isRetryTransaction() {
+		return retryTransaction;
+	}
 
-    /**
-     * Sets the value of the retryTransaction property.
-     * 
-     */
-    public void setRetryTransaction(boolean value) {
-        this.retryTransaction = value;
-    }
+	/**
+	 * Sets the value of the retryTransaction property.
+	 * 
+	 */
+	public void setRetryTransaction(boolean value) {
+		this.retryTransaction = value;
+	}
 
-    /**
-     * Gets the value of the tellerId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTellerId() {
-        return tellerId;
-    }
+	/**
+	 * Gets the value of the tellerId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getTellerId() {
+		return tellerId;
+	}
 
-    /**
-     * Sets the value of the tellerId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTellerId(String value) {
-        this.tellerId = value;
-    }
+	/**
+	 * Sets the value of the tellerId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setTellerId(String value) {
+		this.tellerId = value;
+	}
 
-    /**
-     * Gets the value of the terminalId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTerminalId() {
-        return terminalId;
-    }
+	/**
+	 * Gets the value of the terminalId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getTerminalId() {
+		return terminalId;
+	}
 
-    /**
-     * Sets the value of the terminalId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTerminalId(String value) {
-        this.terminalId = value;
-    }
+	/**
+	 * Sets the value of the terminalId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setTerminalId(String value) {
+		this.terminalId = value;
+	}
 
-    /**
-     * Gets the value of the workstationId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getWorkstationId() {
-        return workstationId;
-    }
+	/**
+	 * Gets the value of the workstationId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getWorkstationId() {
+		return workstationId;
+	}
 
-    /**
-     * Sets the value of the workstationId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setWorkstationId(String value) {
-        this.workstationId = value;
-    }
+	/**
+	 * Sets the value of the workstationId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setWorkstationId(String value) {
+		this.workstationId = value;
+	}
 
-    /**
-     * Gets the value of the override property.
-     * 
-     */
-    public boolean isOverride() {
-        return override;
-    }
+	/**
+	 * Gets the value of the override property.
+	 * 
+	 */
+	public boolean isOverride() {
+		return override;
+	}
 
-    /**
-     * Sets the value of the override property.
-     * 
-     */
-    public void setOverride(boolean value) {
-        this.override = value;
-    }
+	/**
+	 * Sets the value of the override property.
+	 * 
+	 */
+	public void setOverride(boolean value) {
+		this.override = value;
+	}
 
-    /**
-     * Gets the value of the correction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCorrection() {
-        return correction;
-    }
+	/**
+	 * Gets the value of the correction property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCorrection() {
+		return correction;
+	}
 
-    /**
-     * Sets the value of the correction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCorrection(String value) {
-        this.correction = value;
-    }
+	/**
+	 * Sets the value of the correction property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setCorrection(String value) {
+		this.correction = value;
+	}
 
-    /**
-     * Gets the value of the supervisor property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSupervisor() {
-        return supervisor;
-    }
+	/**
+	 * Gets the value of the supervisor property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSupervisor() {
+		return supervisor;
+	}
 
-    /**
-     * Sets the value of the supervisor property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSupervisor(String value) {
-        this.supervisor = value;
-    }
+	/**
+	 * Sets the value of the supervisor property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setSupervisor(String value) {
+		this.supervisor = value;
+	}
 
-    /**
-     * Gets the value of the supervisorId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSupervisorId() {
-        return supervisorId;
-    }
+	/**
+	 * Gets the value of the supervisorId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSupervisorId() {
+		return supervisorId;
+	}
 
-    /**
-     * Sets the value of the supervisorId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSupervisorId(String value) {
-        this.supervisorId = value;
-    }
+	/**
+	 * Sets the value of the supervisorId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setSupervisorId(String value) {
+		this.supervisorId = value;
+	}
 
-    /**
-     * Gets the value of the overrideCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getOverrideCode() {
-        return overrideCode;
-    }
+	/**
+	 * Gets the value of the overrideCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getOverrideCode() {
+		return overrideCode;
+	}
 
-    /**
-     * Sets the value of the overrideCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setOverrideCode(String value) {
-        this.overrideCode = value;
-    }
+	/**
+	 * Sets the value of the overrideCode property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setOverrideCode(String value) {
+		this.overrideCode = value;
+	}
 
-    /**
-     * Gets the value of the employeeId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getEmployeeId() {
-        return employeeId;
-    }
+	/**
+	 * Gets the value of the employeeId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getEmployeeId() {
+		return employeeId;
+	}
 
-    /**
-     * Sets the value of the employeeId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setEmployeeId(String value) {
-        this.employeeId = value;
-    }
+	/**
+	 * Sets the value of the employeeId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setEmployeeId(String value) {
+		this.employeeId = value;
+	}
 
-    /**
-     * Gets the value of the branchId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getBranchId() {
-        return branchId;
-    }
+	/**
+	 * Gets the value of the branchId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getBranchId() {
+		return branchId;
+	}
 
-    /**
-     * Sets the value of the branchId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBranchId(String value) {
-        this.branchId = value;
-    }
+	/**
+	 * Sets the value of the branchId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setBranchId(String value) {
+		this.branchId = value;
+	}
 
-    /**
-     * Gets the value of the functionId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFunctionId() {
-        return functionId;
-    }
+	/**
+	 * Gets the value of the functionId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getFunctionId() {
+		return functionId;
+	}
 
-    /**
-     * Sets the value of the functionId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFunctionId(String value) {
-        this.functionId = value;
-    }
+	/**
+	 * Sets the value of the functionId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setFunctionId(String value) {
+		this.functionId = value;
+	}
 
-    /**
-     * Gets the value of the channelId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getChannelId() {
-        return channelId;
-    }
+	/**
+	 * Gets the value of the channelId property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getChannelId() {
+		return channelId;
+	}
 
-    /**
-     * Sets the value of the channelId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setChannelId(String value) {
-        this.channelId = value;
-    }
+	/**
+	 * Sets the value of the channelId property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setChannelId(String value) {
+		this.channelId = value;
+	}
 
-    /**
-     * Gets the value of the bancsPwd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getBancsPwd() {
-        return bancsPwd;
-    }
+	/**
+	 * Gets the value of the bancsPwd property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getBancsPwd() {
+		return bancsPwd;
+	}
 
-    /**
-     * Sets the value of the bancsPwd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBancsPwd(String value) {
-        this.bancsPwd = value;
-    }
+	/**
+	 * Sets the value of the bancsPwd property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setBancsPwd(String value) {
+		this.bancsPwd = value;
+	}
 
-    /**
-     * Gets the value of the languageCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLanguageCode() {
-        return languageCode;
-    }
+	/**
+	 * Gets the value of the languageCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getLanguageCode() {
+		return languageCode;
+	}
 
-    /**
-     * Sets the value of the languageCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLanguageCode(String value) {
-        this.languageCode = value;
-    }
+	/**
+	 * Sets the value of the languageCode property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setLanguageCode(String value) {
+		this.languageCode = value;
+	}
 
-    /**
-     * Gets the value of the authenticationType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAuthenticationType() {
-        return authenticationType;
-    }
+	/**
+	 * Gets the value of the authenticationType property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getAuthenticationType() {
+		return authenticationType;
+	}
 
-    /**
-     * Sets the value of the authenticationType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAuthenticationType(String value) {
-        this.authenticationType = value;
-    }
+	/**
+	 * Sets the value of the authenticationType property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setAuthenticationType(String value) {
+		this.authenticationType = value;
+	}
 
-    /**
-     * Gets the value of the ivrTransactionID property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIvrTransactionID() {
-        return ivrTransactionID;
-    }
+	/**
+	 * Gets the value of the ivrTransactionID property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getIvrTransactionID() {
+		return ivrTransactionID;
+	}
 
-    /**
-     * Sets the value of the ivrTransactionID property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIvrTransactionID(String value) {
-        this.ivrTransactionID = value;
-    }
+	/**
+	 * Sets the value of the ivrTransactionID property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setIvrTransactionID(String value) {
+		this.ivrTransactionID = value;
+	}
 
 }

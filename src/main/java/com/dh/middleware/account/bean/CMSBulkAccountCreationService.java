@@ -2,7 +2,6 @@ package com.dh.middleware.account.bean;
 
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,62 +39,60 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CMSBulkAccountCreationService {
   
-	  @Autowired
-	  Utils oUtils;
-	  
-	  @Autowired
-	  StringUtil oStringUtil;
-	  
-	  @Autowired
-	  NumberUtil oNumberUtil;
-	  
-	  @Autowired
-	  ObjectMapper objectMapper;
-	  
-	  @Autowired
-	  private AccountUtils oAccountUtils;
-	  
-	  private ServiceHeader oServiceHeader;
-	  
-	  private CMSBulkAccountCreation oAccountCreation;
-	  
-	  private CMSBulkAccountCreationRequest oCMSBulkAccountCreationRequest;
-	  
-		public CMSBulkAccountCreation getoAccountCreation() {
-			return oAccountCreation;
-		}
+	@Autowired
+	Utils oUtils;
 
-		public void setoAccountCreation(CMSBulkAccountCreation oAccountCreation) {
-			this.oAccountCreation = oAccountCreation;
-		}
+	@Autowired
+	StringUtil oStringUtil;
 
-		public CMSBulkAccountCreationRequest getoCMSBulkAccountCreationRequest() {
-			return oCMSBulkAccountCreationRequest;
-		}
+	@Autowired
+	NumberUtil oNumberUtil;
 
-		public void setoCMSBulkAccountCreationRequest(CMSBulkAccountCreationRequest oCMSBulkAccountCreationRequest) {
-			this.oCMSBulkAccountCreationRequest = oCMSBulkAccountCreationRequest;
-		}
-	
-	  
-	  private String logContextToken = "37a7d803-a2a8-11ef-e18e-19d35b9b168a:2f40e637-0b26-11ef-e18e-1a001a4d93d1:1.003.001:";
-	  
-	  private String serviceID = "IOMSRV99025";
-	  
-	  public void setCMSBulkAccountCreationRequestIn(CMSBulkAccountCreation accountCreation, 
-			  @Header("ServiceHeader") String serviceHeader) throws JsonMappingException, JsonProcessingException{
-		  
-		  this.oServiceHeader = objectMapper.readValue(serviceHeader, ServiceHeader.class);
-		  this.oAccountCreation = accountCreation;
-		  this.oCMSBulkAccountCreationRequest = accountCreation.getAccountCreationRequest();
-	  }
-	  
-	  
-	  public ProcessRequest processRequest(Exchange ex) throws Exception{
+	@Autowired
+	ObjectMapper objectMapper;
+
+	@Autowired
+	private AccountUtils oAccountUtils;
+
+	private ServiceHeader oServiceHeader;
+
+	private CMSBulkAccountCreation oAccountCreation;
+
+	private CMSBulkAccountCreationRequest oCMSBulkAccountCreationRequest;
+
+	public CMSBulkAccountCreation getoAccountCreation() {
+		return oAccountCreation;
+	}
+
+	public void setoAccountCreation(CMSBulkAccountCreation oAccountCreation) {
+		this.oAccountCreation = oAccountCreation;
+	}
+
+	public CMSBulkAccountCreationRequest getoCMSBulkAccountCreationRequest() {
+		return oCMSBulkAccountCreationRequest;
+	}
+
+	public void setoCMSBulkAccountCreationRequest(CMSBulkAccountCreationRequest oCMSBulkAccountCreationRequest) {
+		this.oCMSBulkAccountCreationRequest = oCMSBulkAccountCreationRequest;
+	}
+
+	private String logContextToken = "37a7d803-a2a8-11ef-e18e-19d35b9b168a:2f40e637-0b26-11ef-e18e-1a001a4d93d1:1.003.001:";
+
+	private String serviceID = "IOMSRV99025";
+
+	public void setCMSBulkAccountCreationRequestIn(CMSBulkAccountCreation accountCreation,
+			@Header("ServiceHeader") String serviceHeader) throws JsonMappingException, JsonProcessingException {
+
+		this.oServiceHeader = objectMapper.readValue(serviceHeader, ServiceHeader.class);
+		this.oAccountCreation = accountCreation;
+		this.oCMSBulkAccountCreationRequest = accountCreation.getAccountCreationRequest();
+	}
+
+	public ProcessRequest processRequest(Exchange ex) throws Exception {
 
 		String inputMessage = oAccountCreation.toString();
 		CseBusinessBean oCseBusinessBean = new CseBusinessBean();
-		
+
 		oCseBusinessBean.setLogContextToken(logContextToken);
 		oCseBusinessBean.setiNPUTMESSAGE(inputMessage);
 		oCseBusinessBean.setsERVICEID(serviceID);
@@ -103,71 +100,69 @@ public class CMSBulkAccountCreationService {
 		ProcessRequest oProcessRequest = new ProcessRequest();
 		oProcessRequest.setLogContextToken(logContextToken);
 		oProcessRequest.setArg0(oCseBusinessBean);
-		
+
 		return oProcessRequest;
-		  
-	  }
-	  
-	  
-	  public void prepareXMLResponse(Exchange exchange)
-			  throws ExceptionHandler, XPathExpressionException, SAXException, IOException{
-		  
-		  Message message = exchange.getIn();
-		  ProcessRequestResponse oProcessRequestResponse = exchange.getIn().getBody(ProcessRequestResponse.class);
-		  String responseString = oProcessRequestResponse.getReturn();
-		  responseString = URLDecoder.decode(responseString, "CP1256");
-		  
-		  // removing %17, %3D and %2C
-		  
-		  String returncode = oAccountUtils.getValueFromCMSResponse("RETURNCODE", responseString);
-		  
-		  CMSBulkAccountCreation oBulkAccountCreation = new CMSBulkAccountCreation();
-		  
-		  if (returncode.equals("0000")) {
-			  
-			  CMSBulkAccountCreationResponse oBulkAccountCreationResponse = new CMSBulkAccountCreationResponse();
-			  CreatedCMSAccountListType oCMSAccountListType = new CreatedCMSAccountListType();
-			  List<CreatedCMSAccountType> oCMSAccountType = new ArrayList<CreatedCMSAccountType>();
-			    
-			  String jsonString = this.oAccountUtils.getValueFromCMSResponse("XMLMSG", responseString);
-			  
-			  JsonNode root = this.objectMapper.readTree(jsonString);
-			  
-			  if (root != null) {
-				  JsonNode accdataArrays = root.get("ACCDATA");
-				  
-			        for (JsonNode accdata : accdataArrays) {
-			        	
-			        	CreatedCMSAccountType oAccountType = new CreatedCMSAccountType();
-			        	
-			        	oAccountType.setIbanAccountNumber(oStringUtil.setDefaultValue(accdata.get("IBANACCOUNTNB"),null));
-			        	oAccountType.setAccountNumber(oStringUtil.setDefaultValue(accdata.get("ACCOUNTNB"),null));
-			        	oAccountType.setRemitterId(oStringUtil.setDefaultValue(accdata.get("CUSTOMERNB"), null));
-			        	oAccountType.setTransactionNotificationFlag(oStringUtil.setDefaultValue(accdata.get("ISNOTIFICATIONENABLED"), null));
-			        	oAccountType.setDebitCreditFlag(oStringUtil.setDefaultValue(accdata.get("DEBITFLAG"), null));
-			        	oAccountType.setMinimumAccountBalanceLimit(oStringUtil.setDefaultValue("0", null));
-			        	oAccountType.setMaximumAccountBalanceLimit(oStringUtil.setDefaultValue("0", null));
-			        	oAccountType.setSubscriptionFlag(oStringUtil.setDefaultValue("string", null));
-			        	oAccountType.setAccountResetFlag(oStringUtil.setDefaultValue("string", null));
-			        	
-			        	oCMSAccountType.add(oAccountType);
-			        	
-			        }
-			  }
-			  oCMSAccountListType.setAccount(oCMSAccountType);
-			  oBulkAccountCreationResponse.setSuccess(oCMSAccountListType);
-			  oBulkAccountCreation.setAccountCreationResponse(oBulkAccountCreationResponse);
 
-			  message.setBody(oBulkAccountCreation);
-		  }else {
-			  String nativeDescription = oAccountUtils.getValueFromCMSResponse("DESCRIPTION", responseString);
+	}
 
-				message.setBody(oUtils.prepareFaultNodeStr("CMSBulkAccountCreationResponse", "CMS", "", returncode,
-						nativeDescription, "sysOrAppWithBkndError", exchange));
-		  }
+	public void prepareXMLResponse(Exchange exchange)
+			throws ExceptionHandler, XPathExpressionException, SAXException, IOException {
 
-//		  return oBulkAccountCreation;
-		  
-	  }
-	  
+		Message message = exchange.getIn();
+		ProcessRequestResponse oProcessRequestResponse = exchange.getIn().getBody(ProcessRequestResponse.class);
+		String responseString = oProcessRequestResponse.getReturn();
+		responseString = URLDecoder.decode(responseString, "CP1256");
+
+		// removing %17, %3D and %2C
+
+		String returncode = oAccountUtils.getValueFromCMSResponse("RETURNCODE", responseString);
+
+		CMSBulkAccountCreation oBulkAccountCreation = new CMSBulkAccountCreation();
+
+		if (returncode.equals("0000")) {
+
+			CMSBulkAccountCreationResponse oBulkAccountCreationResponse = new CMSBulkAccountCreationResponse();
+			CreatedCMSAccountListType oCMSAccountListType = new CreatedCMSAccountListType();
+			List<CreatedCMSAccountType> oCMSAccountType = new ArrayList<CreatedCMSAccountType>();
+
+			String jsonString = this.oAccountUtils.getValueFromCMSResponse("XMLMSG", responseString);
+
+			JsonNode root = this.objectMapper.readTree(jsonString);
+
+			if (root != null) {
+				JsonNode accdataArrays = root.get("ACCDATA");
+
+				for (JsonNode accdata : accdataArrays) {
+
+					CreatedCMSAccountType oAccountType = new CreatedCMSAccountType();
+
+					oAccountType.setIbanAccountNumber(oStringUtil.setDefaultValue(accdata.get("IBANACCOUNTNB"), null));
+					oAccountType.setAccountNumber(oStringUtil.setDefaultValue(accdata.get("ACCOUNTNB"), null));
+					oAccountType.setRemitterId(oStringUtil.setDefaultValue(accdata.get("CUSTOMERNB"), null));
+					oAccountType.setTransactionNotificationFlag(
+							oStringUtil.setDefaultValue(accdata.get("ISNOTIFICATIONENABLED"), null));
+					oAccountType.setDebitCreditFlag(oStringUtil.setDefaultValue(accdata.get("DEBITFLAG"), null));
+					oAccountType.setMinimumAccountBalanceLimit(oStringUtil.setDefaultValue("0", null));
+					oAccountType.setMaximumAccountBalanceLimit(oStringUtil.setDefaultValue("0", null));
+					oAccountType.setSubscriptionFlag(oStringUtil.setDefaultValue("string", null));
+					oAccountType.setAccountResetFlag(oStringUtil.setDefaultValue("string", null));
+
+					oCMSAccountType.add(oAccountType);
+
+				}
+			}
+			oCMSAccountListType.setAccount(oCMSAccountType);
+			oBulkAccountCreationResponse.setSuccess(oCMSAccountListType);
+			oBulkAccountCreation.setAccountCreationResponse(oBulkAccountCreationResponse);
+
+			message.setBody(oBulkAccountCreation);
+		} else {
+			String nativeDescription = oAccountUtils.getValueFromCMSResponse("DESCRIPTION", responseString);
+
+			message.setBody(oUtils.prepareFaultNodeStr("CMSBulkAccountCreationResponse", "CMS", "", returncode,
+					nativeDescription, "sysOrAppWithBkndError", exchange));
+		}
+
+	}
+
 }

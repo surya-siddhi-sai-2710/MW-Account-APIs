@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "CMSAccountsRequest",
-    "CMSOmniAccountDetailsResponse"
-})
+@JsonPropertyOrder({ "CMSAccountsRequest", "CMSOmniAccountDetailsResponse" })
 public class CMSOmniAccountDetails {
 
 	@JsonProperty("CMSAccountsRequest")
@@ -32,19 +29,19 @@ public class CMSOmniAccountDetails {
 	public void setAccountDetailsResponse(CMSOmniAccountDetailsResponse accountDetailsResponse) {
 		this.accountDetailsResponse = accountDetailsResponse;
 	}
-	
+
 	@Override
 	public String toString() {
-		
+
 		if (accountDetailsRequest == null) {
-            return "{\"CMSAccountsRequest\": null}";
-        }
-		
-		return "{" + "\"CMSAccountsRequest\": {" + "\"omniAccountNumber\": \"" + accountDetailsRequest.getOmniAccountNumber()
-				+ "\"," + "\"cifNumber\": \"" + accountDetailsRequest.getCifNumber() + "\","
-				+ "\"transactionNotificationFlag\": \"" + accountDetailsRequest.getTransactionNotificationFlag()
-				+ "\"" + "}" + "}";
-		
+			return "{\"CMSAccountsRequest\": null}";
+		}
+
+		return "{" + "\"CMSAccountsRequest\": {" + "\"omniAccountNumber\": \""
+				+ accountDetailsRequest.getOmniAccountNumber() + "\"," + "\"cifNumber\": \""
+				+ accountDetailsRequest.getCifNumber() + "\"," + "\"transactionNotificationFlag\": \""
+				+ accountDetailsRequest.getTransactionNotificationFlag() + "\"" + "}" + "}";
+
 	}
 
 }

@@ -13,7 +13,7 @@ public class CMSBulkAccountCreation {
 
 	@JsonProperty("CMSAccountsRequest")
 	private CMSBulkAccountCreationRequest accountCreationRequest;
-	
+
 	@JsonProperty("CMSBulkAccountCreationResponse")
 	private CMSBulkAccountCreationResponse accountCreationResponse;
 
@@ -35,11 +35,11 @@ public class CMSBulkAccountCreation {
 
 	@Override
 	public String toString() {
-		
+
 		if (accountCreationRequest == null) {
-            return "{\"CMSAccountsRequest\": null}";
-        }
-		
+			return "{\"CMSAccountsRequest\": null}";
+		}
+
 		return "{" + "\"CMSAccountsRequest\": {" + "\"omniMappedCode\": \"" + accountCreationRequest.getOmniMappedCode()
 				+ "\"," + "\"bulkCount\": \"" + accountCreationRequest.getBulkCount() + "\","
 				+ "\"omniEnglishName\": \"" + accountCreationRequest.getOmniEnglishName() + "\","
@@ -56,25 +56,6 @@ public class CMSBulkAccountCreation {
 				+ accountCreationRequest.getMaximumAccountBalanceLimit() + "\"," + "\"subscriptionFlag\": \""
 				+ accountCreationRequest.getSubscriptionFlag() + "\"," + "\"accountResetFlag\": \""
 				+ accountCreationRequest.getAccountResetFlag() + "\"" + "}" + "}";
-		
-//		return	
-//				"" + "OMNIENAME=" + accountCreationRequest.getOmniEnglishName()
-//				+ "BULKCOUNT=" + accountCreationRequest.getBulkCount()
-//				+ "OMNIMAPPEDCODE=" + accountCreationRequest.getOmniMappedCode()
-//				+ "OMNIANAME=" + accountCreationRequest.getOmniArabicName()
-//				+ "CURRENCY=" + accountCreationRequest.getCurrency()
-//				+ "OMNIACCOUNTNB=" + accountCreationRequest.getOmniAccountNumber() 
-//				+ "CUSTOMERNBFROM=" + accountCreationRequest.getRemitterIdFrom() 
-//				+ "CUSTOMERNBTO=" + accountCreationRequest.getRemitterIdTo() 
-//				+ "ALLOWEDTRNTYPESFORMATED=" + accountCreationRequest.getBlockedTransactions() 
-//				+ "USERAUDITCOMMENTS=" + accountCreationRequest.getUserComments() 
-//				+ "ISNOTIFICATIONENABLED=" + accountCreationRequest.getTransactionNotificationFlag() 
-//				+ "DEBITCREDITFLAG=" + accountCreationRequest.getDebitCreditFlag() 
-//				+ "MINIMUMLIMIT=" + accountCreationRequest.getMinimumAccountBalanceLimit() 
-//				+ "MAXIMUMLIMIT=" + accountCreationRequest.getMaximumAccountBalanceLimit() 
-//				+ "MT940SUBSCRIPTIONFLAG=" + accountCreationRequest.getSubscriptionFlag() 
-//				+ "ACCOUNTRESETFLAG=" + accountCreationRequest.getAccountResetFlag();
 	}
 
-	
 }

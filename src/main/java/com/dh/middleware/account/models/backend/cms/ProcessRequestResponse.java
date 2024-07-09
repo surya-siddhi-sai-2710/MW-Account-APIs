@@ -7,14 +7,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "processRequestResponse", propOrder = {
-    "_return"
-})
-@XmlRootElement(name = "processRequestResponse",namespace = "http://web.cse.com/")
+@XmlType(name = "processRequestResponse", propOrder = { "_return" })
+@XmlRootElement(name = "processRequestResponse", namespace = "http://web.cse.com/")
 public class ProcessRequestResponse {
 
 	@XmlElement(name = "return")
-    protected String _return;
+	protected String _return;
 
 	public String getReturn() {
 		return _return;
@@ -23,6 +21,5 @@ public class ProcessRequestResponse {
 	public void setReturn(String _return) {
 		this._return = _return;
 	}
-	
-	
+
 }
