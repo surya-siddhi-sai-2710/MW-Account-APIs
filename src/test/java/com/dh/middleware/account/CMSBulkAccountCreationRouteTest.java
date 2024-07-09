@@ -49,25 +49,27 @@ public class CMSBulkAccountCreationRouteTest {
 
 	@Autowired
 	ProducerTemplate producerTemplate;
-	
+
 	@EndpointInject("mock://http:localhost:8080/api/connector/uddi/cms/v1/ProcessRequest")
 	private MockEndpoint cdmockEndpoint;
-	
+
 	@EndpointInject("mock://http:localhost:8081/api/connector/configstore")
 	private MockEndpoint configStore;
-	
+
 	@Test
 	public void cMSBulkAccountCreationSuccessTest() throws Exception {
 
 		String getCMSBulkAccountRequest = Resources.toString(
-				Resources.getResource("mock/frontend/CMSBulkAccountCreation/CMSBulkAccountCreationSuccessRequest.json"), Charsets.UTF_8);
+				Resources.getResource("mock/frontend/CMSBulkAccountCreation/CMSBulkAccountCreationSuccessRequest.json"),
+				Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
 				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
 				Charsets.UTF_8);
 
 		String getCMSBulkAccountResponse = Resources.toString(
-				Resources.getResource("mock/backend/CMSBulkAccountCreation/CMSBulkAccountCreationResponseBknd.xml"), Charsets.UTF_8);
+				Resources.getResource("mock/backend/CMSBulkAccountCreation/CMSBulkAccountCreationResponseBknd.xml"),
+				Charsets.UTF_8);
 
 		AdviceWith.adviceWith(camelContext, "CMSBulkAccountCreation", routeBuilder ->
 
@@ -91,31 +93,37 @@ public class CMSBulkAccountCreationRouteTest {
 
 		camelContext.start();
 
-		CMSBulkAccountCreation oCMSBulkAccountCreationRequest = objectMapper.readValue(getCMSBulkAccountRequest, CMSBulkAccountCreation.class);
+		CMSBulkAccountCreation oCMSBulkAccountCreationRequest = objectMapper.readValue(getCMSBulkAccountRequest,
+				CMSBulkAccountCreation.class);
 
 		Map<String, Object> headers = new HashMap<String, Object>();
-		headers.put("ServiceHeader", "{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
-		
-		CMSBulkAccountCreation successResponse = producerTemplate.requestBodyAndHeaders("direct:CMSBulkAccountCreation", 
-				oCMSBulkAccountCreationRequest,  headers, CMSBulkAccountCreation.class);
+		headers.put("ServiceHeader",
+				"{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
 
-		System.out.println("CMSBulkAccountCreationResponse " + successResponse.getAccountCreationResponse().getSuccess().getAccount().get(0).getAccountNumber());
+		CMSBulkAccountCreation successResponse = producerTemplate.requestBodyAndHeaders("direct:CMSBulkAccountCreation",
+				oCMSBulkAccountCreationRequest, headers, CMSBulkAccountCreation.class);
 
-		Assertions.assertNotNull(successResponse.getAccountCreationResponse().getSuccess().getAccount().get(0).getAccountNumber());
+		System.out.println("CMSBulkAccountCreationResponse "
+				+ successResponse.getAccountCreationResponse().getSuccess().getAccount().get(0).getAccountNumber());
+
+		Assertions.assertNotNull(
+				successResponse.getAccountCreationResponse().getSuccess().getAccount().get(0).getAccountNumber());
 	}
-	
+
 	@Test
 	public void cMSBulkAccountCreationFaultTest() throws Exception {
 
 		String getCMSBulkAccountRequest = Resources.toString(
-				Resources.getResource("mock/frontend/CMSBulkAccountCreation/CMSBulkAccountCreationFaultRequest.json"), Charsets.UTF_8);
+				Resources.getResource("mock/frontend/CMSBulkAccountCreation/CMSBulkAccountCreationFaultRequest.json"),
+				Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
 				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
 				Charsets.UTF_8);
 
 		String getCMSBulkAccountResponse = Resources.toString(
-				Resources.getResource("mock/backend/CMSBulkAccountCreation/CMSBulkAccountCreationFaultResponse.xml"), Charsets.UTF_8);
+				Resources.getResource("mock/backend/CMSBulkAccountCreation/CMSBulkAccountCreationFaultResponse.xml"),
+				Charsets.UTF_8);
 
 		AdviceWith.adviceWith(camelContext, "CMSBulkAccountCreation", routeBuilder ->
 
@@ -139,18 +147,17 @@ public class CMSBulkAccountCreationRouteTest {
 
 		camelContext.start();
 
-		CMSBulkAccountCreation oCMSBulkAccountCreationRequest = objectMapper.readValue(getCMSBulkAccountRequest, CMSBulkAccountCreation.class);
+		CMSBulkAccountCreation oCMSBulkAccountCreationRequest = objectMapper.readValue(getCMSBulkAccountRequest,
+				CMSBulkAccountCreation.class);
 
 		Map<String, Object> headers = new HashMap<String, Object>();
-		headers.put("ServiceHeader", "{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
+		headers.put("ServiceHeader",
+				"{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
 
-		
-		String faultResponse = producerTemplate.requestBodyAndHeaders("direct:CMSBulkAccountCreation", 
-				oCMSBulkAccountCreationRequest,  headers, String.class);
-
+		String faultResponse = producerTemplate.requestBodyAndHeaders("direct:CMSBulkAccountCreation",
+				oCMSBulkAccountCreationRequest, headers, String.class);
 
 		System.out.println("CMSBulkAccountCreationResponse " + faultResponse);
-		
 
 	}
 }

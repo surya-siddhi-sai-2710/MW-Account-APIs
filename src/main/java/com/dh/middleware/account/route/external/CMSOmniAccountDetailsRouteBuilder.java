@@ -7,7 +7,6 @@ import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
-import com.dh.middleware.account.models.CMSBulkAccountCreation;
 import com.dh.middleware.account.models.CMSOmniAccountDetails;
 import com.dh.middleware.account.models.backend.cms.ProcessRequest;
 
@@ -46,11 +45,11 @@ public class CMSOmniAccountDetailsRouteBuilder extends RouteBuilder {
 		.to("{{UDDIConnector.host}}{{UDDIConnector.contextPath}}"+"/cms/v1/ProcessRequest?bridgeEndpoint=true")
 		
 		.choice()
-			.when().simple("${body} != null")
-				.to("bean:CMSOmniAccountDetailsService?method=prepareXMLResponse")
-				.setHeader("Content-Type",constant("application/json"))
-			.otherwise()
-				.to("bean:oUtils?method=prepareFaultNodeStr(\"CMSOmniAccountDetailsResponse\",\"RECORDNOTFOUND\",\"\",\"\",\"\",\"sysOrAppWithoutBkndError\",${exchange})")
+				.when().simple("${body} != null")
+					.to("bean:CMSOmniAccountDetailsService?method=prepareXMLResponse")
+					.setHeader("Content-Type",constant("application/json"))
+				.otherwise()
+					.to("bean:oUtils?method=prepareFaultNodeStr(\"CMSOmniAccountDetailsResponse\",\"RECORDNOTFOUND\",\"\",\"\",\"\",\"sysOrAppWithoutBkndError\",${exchange})")
 		.endChoice();
 		
 	}

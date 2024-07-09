@@ -51,25 +51,27 @@ public class CMSOmniAccountDetailsRouteTest {
 
 	@Autowired
 	ProducerTemplate producerTemplate;
-	
+
 	@EndpointInject("mock://http:localhost:8080/api/connector/uddi/cms/v1/ProcessRequest")
 	private MockEndpoint cdmockEndpoint;
-	
+
 	@EndpointInject("mock://http:localhost:8081/api/connector/configstore")
 	private MockEndpoint configStore;
-	
+
 	@Test
 	public void cMSOmniAccountDetailsSuccessTest() throws Exception {
 
 		String getCMSOmniAccountRequest = Resources.toString(
-				Resources.getResource("mock/frontend/CMSOmniAccountDetails/CMSOmniAccountDetailsSuccessRequest.json"), Charsets.UTF_8);
+				Resources.getResource("mock/frontend/CMSOmniAccountDetails/CMSOmniAccountDetailsSuccessRequest.json"),
+				Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
 				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
 				Charsets.UTF_8);
 
 		String getCMSOmniAccountResponse = Resources.toString(
-				Resources.getResource("mock/backend/CMSOmniAccountDetails/CMSOmniAccountDetailsSuccessResponse.xml"), Charsets.UTF_8);
+				Resources.getResource("mock/backend/CMSOmniAccountDetails/CMSOmniAccountDetailsSuccessResponse.xml"),
+				Charsets.UTF_8);
 
 		AdviceWith.adviceWith(camelContext, "CMSOmniAccountDetails", routeBuilder ->
 
@@ -93,39 +95,44 @@ public class CMSOmniAccountDetailsRouteTest {
 
 		camelContext.start();
 
-		CMSOmniAccountDetails oCMSOmniAccountDetailsRequest = objectMapper.readValue(getCMSOmniAccountRequest, CMSOmniAccountDetails.class);
-		
+		CMSOmniAccountDetails oCMSOmniAccountDetailsRequest = objectMapper.readValue(getCMSOmniAccountRequest,
+				CMSOmniAccountDetails.class);
+
 		Map<String, Object> headers = new HashMap<String, Object>();
-		headers.put("ServiceHeader", "{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
-		
-		CMSOmniAccountDetails successResponse = producerTemplate.requestBodyAndHeaders("direct:CMSOmniAccountDetails", 
-				oCMSOmniAccountDetailsRequest,  headers, CMSOmniAccountDetails.class);
+		headers.put("ServiceHeader",
+				"{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
 
-		System.out.println("CMSOmniAccountDetailsResponse " + successResponse.getAccountDetailsResponse().getSuccess().getAccount().get(0).getAccountOwnerType());
+		CMSOmniAccountDetails successResponse = producerTemplate.requestBodyAndHeaders("direct:CMSOmniAccountDetails",
+				oCMSOmniAccountDetailsRequest, headers, CMSOmniAccountDetails.class);
 
-		Assertions.assertNotNull(successResponse.getAccountDetailsResponse().getSuccess().getAccount().get(0).getAccountOwnerType());
+		System.out.println("CMSOmniAccountDetailsResponse "
+				+ successResponse.getAccountDetailsResponse().getSuccess().getAccount().get(0).getAccountOwnerType());
+
+		Assertions.assertNotNull(
+				successResponse.getAccountDetailsResponse().getSuccess().getAccount().get(0).getAccountOwnerType());
 	}
-	
+
 	@Test
 	public void cMSOmniAccountDetailsFaultTest() throws Exception {
-		
+
 		String getCMSOmniAccountRequest = Resources.toString(
-				Resources.getResource("mock/frontend/CMSOmniAccountDetails/CMSOmniAccountDetailsFaultRequest.json"), Charsets.UTF_8);
+				Resources.getResource("mock/frontend/CMSOmniAccountDetails/CMSOmniAccountDetailsFaultRequest.json"),
+				Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
 				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
 				Charsets.UTF_8);
 
 		String getCMSOmniAccountResponse = Resources.toString(
-				Resources.getResource("mock/backend/CMSOmniAccountDetails/CMSOmniAccountDetailsFaultResponse.xml"), Charsets.UTF_8);
+				Resources.getResource("mock/backend/CMSOmniAccountDetails/CMSOmniAccountDetailsFaultResponse.xml"),
+				Charsets.UTF_8);
 
 		AdviceWith.adviceWith(camelContext, "CMSOmniAccountDetails", routeBuilder ->
 
 		{
 			routeBuilder.replaceFromWith("direct:CMSOmniAccountDetails");
 		});
-		
-		
+
 		cdmockEndpoint.expectedMessageCount(1);
 		cdmockEndpoint.whenAnyExchangeReceived(new Processor() {
 			public void process(Exchange exchange) throws Exception {
@@ -142,18 +149,18 @@ public class CMSOmniAccountDetailsRouteTest {
 
 		camelContext.start();
 
-		CMSOmniAccountDetails oCMSOmniAccountDetailsRequest = objectMapper.readValue(getCMSOmniAccountRequest, CMSOmniAccountDetails.class);
+		CMSOmniAccountDetails oCMSOmniAccountDetailsRequest = objectMapper.readValue(getCMSOmniAccountRequest,
+				CMSOmniAccountDetails.class);
 
 		Map<String, Object> headers = new HashMap<String, Object>();
-		headers.put("ServiceHeader", "{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
-		
-		
-		String faultResponse = producerTemplate.requestBodyAndHeaders("direct:CMSOmniAccountDetails", 
-				oCMSOmniAccountDetailsRequest,  headers, String.class);
+		headers.put("ServiceHeader",
+				"{  \"channelId\": \"800\", \"languageCode\": \"en_US\",\"authenticationType\": \"OTP\"}");
 
+		String faultResponse = producerTemplate.requestBodyAndHeaders("direct:CMSOmniAccountDetails",
+				oCMSOmniAccountDetailsRequest, headers, String.class);
 
 		System.out.println("CMSOmniAccountDetailsResponse " + faultResponse);
-		
+
 		Assertions.assertNotNull(faultResponse.contains("fault"));
 	}
 }
