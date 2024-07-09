@@ -46,7 +46,7 @@ public class CMSOmniAccountDetailsRouteBuilder extends RouteBuilder {
 		
 		.choice()
 				.when().simple("${body} != null")
-					.to("bean:CMSOmniAccountDetailsService?method=prepareXMLResponse")
+					.to("bean:CMSOmniAccountDetailsService?method=processResponse")
 					.setHeader("Content-Type",constant("application/json"))
 				.otherwise()
 					.to("bean:oUtils?method=prepareFaultNodeStr(\"CMSOmniAccountDetailsResponse\",\"RECORDNOTFOUND\",\"\",\"\",\"\",\"sysOrAppWithoutBkndError\",${exchange})")

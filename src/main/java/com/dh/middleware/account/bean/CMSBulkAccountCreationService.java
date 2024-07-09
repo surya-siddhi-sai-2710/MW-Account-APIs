@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CMSBulkAccountCreationService {
-  
+
 	@Autowired
 	Utils oUtils;
 
@@ -105,7 +105,7 @@ public class CMSBulkAccountCreationService {
 
 	}
 
-	public void prepareXMLResponse(Exchange exchange)
+	public void processResponse(Exchange exchange)
 			throws ExceptionHandler, XPathExpressionException, SAXException, IOException {
 
 		Message message = exchange.getIn();
@@ -130,18 +130,19 @@ public class CMSBulkAccountCreationService {
 			JsonNode root = this.objectMapper.readTree(jsonString);
 
 			if (root != null) {
-				JsonNode accdataArrays = root.get("ACCDATA");
+				JsonNode accDataArray = root.get("ACCDATA");
 
-				for (JsonNode accdata : accdataArrays) {
+				for (JsonNode accDataNode : accDataArray) {
 
 					CreatedCMSAccountType oAccountType = new CreatedCMSAccountType();
 
-					oAccountType.setIbanAccountNumber(oStringUtil.setDefaultValue(accdata.get("IBANACCOUNTNB"), null));
-					oAccountType.setAccountNumber(oStringUtil.setDefaultValue(accdata.get("ACCOUNTNB"), null));
-					oAccountType.setRemitterId(oStringUtil.setDefaultValue(accdata.get("CUSTOMERNB"), null));
+					oAccountType
+							.setIbanAccountNumber(oStringUtil.setDefaultValue(accDataNode.get("IBANACCOUNTNB"), null));
+					oAccountType.setAccountNumber(oStringUtil.setDefaultValue(accDataNode.get("ACCOUNTNB"), null));
+					oAccountType.setRemitterId(oStringUtil.setDefaultValue(accDataNode.get("CUSTOMERNB"), null));
 					oAccountType.setTransactionNotificationFlag(
-							oStringUtil.setDefaultValue(accdata.get("ISNOTIFICATIONENABLED"), null));
-					oAccountType.setDebitCreditFlag(oStringUtil.setDefaultValue(accdata.get("DEBITFLAG"), null));
+							oStringUtil.setDefaultValue(accDataNode.get("ISNOTIFICATIONENABLED"), null));
+					oAccountType.setDebitCreditFlag(oStringUtil.setDefaultValue(accDataNode.get("DEBITFLAG"), null));
 					oAccountType.setMinimumAccountBalanceLimit(oStringUtil.setDefaultValue("0", null));
 					oAccountType.setMaximumAccountBalanceLimit(oStringUtil.setDefaultValue("0", null));
 					oAccountType.setSubscriptionFlag(oStringUtil.setDefaultValue("string", null));
@@ -156,7 +157,9 @@ public class CMSBulkAccountCreationService {
 			oBulkAccountCreation.setAccountCreationResponse(oBulkAccountCreationResponse);
 
 			message.setBody(oBulkAccountCreation);
+
 		} else {
+
 			String nativeDescription = oAccountUtils.getValueFromCMSResponse("DESCRIPTION", responseString);
 
 			message.setBody(oUtils.prepareFaultNodeStr("CMSBulkAccountCreationResponse", "CMS", "", returncode,

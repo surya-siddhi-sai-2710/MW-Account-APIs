@@ -46,7 +46,7 @@ public class CMSBulkAccountCreationRouteBuilder extends RouteBuilder{
 
 		.to("{{UDDIConnector.host}}{{UDDIConnector.contextPath}}"+"/cms/v1/ProcessRequest?bridgeEndpoint=true")
 		
-		.to("bean:CMSBulkAccountCreationService?method=prepareXMLResponse")
+		.to("bean:CMSBulkAccountCreationService?method=processResponse")
 		.setHeader("Content-Type",constant("application/json"));
 		
 	}

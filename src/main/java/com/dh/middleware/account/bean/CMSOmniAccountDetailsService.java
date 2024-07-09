@@ -106,7 +106,7 @@ public class CMSOmniAccountDetailsService {
 
 	}
 
-	public void prepareXMLResponse(Exchange exchange)
+	public void processResponse(Exchange exchange)
 			throws ExceptionHandler, XPathExpressionException, SAXException, IOException {
 
 		Message message = exchange.getIn();
@@ -122,6 +122,7 @@ public class CMSOmniAccountDetailsService {
 
 			CMSOmniAccountDetailsResponse oCmsOmniAccountDetailsResponse = new CMSOmniAccountDetailsResponse();
 			CMSOmniAccountDetailsResponseType oCmsOmniAccountDetailsResponseType = new CMSOmniAccountDetailsResponseType();
+			List<CMSOmniAccountDetailsType> oCMSOmniAccountType = new ArrayList<CMSOmniAccountDetailsType>();
 
 			oCmsOmniAccountDetailsResponseType
 					.setStatusCode(oAccountUtils.getValueFromCMSResponse("RETURNCODE", responseString));
@@ -129,76 +130,76 @@ public class CMSOmniAccountDetailsService {
 					.setStatusDescription(oAccountUtils.getValueFromCMSResponse("DESCRIPTION", responseString));
 			oCmsOmniAccountDetailsResponseType.setNotes(oAccountUtils.getValueFromCMSResponse("NOTES", responseString));
 
-			List<CMSOmniAccountDetailsType> oCMSOmniAccountType = new ArrayList<CMSOmniAccountDetailsType>();
-
 			String jsonString = this.oAccountUtils.getValueFromCMSResponse("XMLMSG", responseString);
 
 			JsonNode root = this.objectMapper.readTree(jsonString);
 
 			if (root != null) {
-				JsonNode accdataArrays = root.get("OMNIDATA");
+				JsonNode accDataArray = root.get("OMNIDATA");
 
-				for (JsonNode accdata : accdataArrays) {
+				for (JsonNode accDataNode : accDataArray) {
 
 					CMSOmniAccountDetailsType oOmniAccountType = new CMSOmniAccountDetailsType();
 
-					oOmniAccountType.setInstitutionCode(oStringUtil.setDefaultValue(accdata.get("INSTCODE"), null));
+					oOmniAccountType.setInstitutionCode(oStringUtil.setDefaultValue(accDataNode.get("INSTCODE"), null));
 					oOmniAccountType
-							.setOmniMappedCode(oStringUtil.setDefaultValue(accdata.get("OMNIMAPPEDCODE"), null));
+							.setOmniMappedCode(oStringUtil.setDefaultValue(accDataNode.get("OMNIMAPPEDCODE"), null));
 					oOmniAccountType
-							.setOmniAccountType(oStringUtil.setDefaultValue(accdata.get("OMNIACCOUNTTYPE"), null));
-					oOmniAccountType.setCurrency(oStringUtil.setDefaultValue(accdata.get("CURRENCYCODE"), null));
+							.setOmniAccountType(oStringUtil.setDefaultValue(accDataNode.get("OMNIACCOUNTTYPE"), null));
+					oOmniAccountType.setCurrency(oStringUtil.setDefaultValue(accDataNode.get("CURRENCYCODE"), null));
 					oOmniAccountType.setOmniCommisionAccount(oStringUtil.setDefaultValue("string", null));
-					oOmniAccountType.setOmniEnglishName(oStringUtil.setDefaultValue(accdata.get("OMNIENAME"), null));
-					oOmniAccountType.setOmniArabicName(oStringUtil.setDefaultValue("string", null));
-					oOmniAccountType.setMainStatus(oStringUtil.setDefaultValue(accdata.get("MSTATUS"), null));
 					oOmniAccountType
-							.setMainStatusDesciption(oStringUtil.setDefaultValue(accdata.get("MSTATUSDESC"), null));
-					oOmniAccountType.setCreateUserCode(oStringUtil.setDefaultValue(accdata.get("CUSERCD"), null));
-					oOmniAccountType.setCreateDate(oStringUtil.setDefaultValue(accdata.get("CDATE"), null));
+							.setOmniEnglishName(oStringUtil.setDefaultValue(accDataNode.get("OMNIENAME"), null));
+					oOmniAccountType.setOmniArabicName(oStringUtil.setDefaultValue("string", null));
+					oOmniAccountType.setMainStatus(oStringUtil.setDefaultValue(accDataNode.get("MSTATUS"), null));
+					oOmniAccountType
+							.setMainStatusDesciption(oStringUtil.setDefaultValue(accDataNode.get("MSTATUSDESC"), null));
+					oOmniAccountType.setCreateUserCode(oStringUtil.setDefaultValue(accDataNode.get("CUSERCD"), null));
+					oOmniAccountType.setCreateDate(oStringUtil.setDefaultValue(accDataNode.get("CDATE"), null));
 					oOmniAccountType.setUpdateUserCode(oStringUtil.setDefaultValue("string", null));
 					oOmniAccountType.setUpdateDate(oStringUtil.setDefaultValue("string", null));
-					oOmniAccountType.setApproveUserCode(oStringUtil.setDefaultValue(accdata.get("AUSERCD"), null));
-					oOmniAccountType.setApproveDate(oStringUtil.setDefaultValue(accdata.get("ADATE"), null));
+					oOmniAccountType.setApproveUserCode(oStringUtil.setDefaultValue(accDataNode.get("AUSERCD"), null));
+					oOmniAccountType.setApproveDate(oStringUtil.setDefaultValue(accDataNode.get("ADATE"), null));
 					oOmniAccountType
-							.setAccountOwnerType(oStringUtil.setDefaultValue(accdata.get("ACCOWNERTYPE"), null));
+							.setAccountOwnerType(oStringUtil.setDefaultValue(accDataNode.get("ACCOWNERTYPE"), null));
 					oOmniAccountType.setAccountOwnerTypeDescription(
-							oStringUtil.setDefaultValue(accdata.get("ACCOWNERTYPEDESC"), null));
-					oOmniAccountType
-							.setLastSequenceOfAccount(oStringUtil.setDefaultValue(accdata.get("ACCOUNTSEQNB"), null));
-					oOmniAccountType.setBranchCode(oStringUtil.setDefaultValue(accdata.get("BRNCD"), null));
-					oOmniAccountType
-							.setCurrencyNumericId(oStringUtil.setDefaultValue(accdata.get("CURRENCYNUMERICID"), null));
+							oStringUtil.setDefaultValue(accDataNode.get("ACCOWNERTYPEDESC"), null));
+					oOmniAccountType.setLastSequenceOfAccount(
+							oStringUtil.setDefaultValue(accDataNode.get("ACCOUNTSEQNB"), null));
+					oOmniAccountType.setBranchCode(oStringUtil.setDefaultValue(accDataNode.get("BRNCD"), null));
+					oOmniAccountType.setCurrencyNumericId(
+							oStringUtil.setDefaultValue(accDataNode.get("CURRENCYNUMERICID"), null));
 					oOmniAccountType.setCifNumber(oStringUtil.setDefaultValue("string", null));
 					oOmniAccountType.setTransactionNotificationFlag(
-							oStringUtil.setDefaultValue(accdata.get("DISNOTIFICATIONENABLED"), null));
-					oOmniAccountType
-							.setAllowedTransactions(oStringUtil.setDefaultValue(accdata.get("DALLOWEDTRNTYPES"), null));
+							oStringUtil.setDefaultValue(accDataNode.get("DISNOTIFICATIONENABLED"), null));
+					oOmniAccountType.setAllowedTransactions(
+							oStringUtil.setDefaultValue(accDataNode.get("DALLOWEDTRNTYPES"), null));
 					oOmniAccountType.setBlockedTransactions(oStringUtil.setDefaultValue("string", null));
 					oOmniAccountType.setFeeFlag(oStringUtil.setDefaultValue("string", null));
 					oOmniAccountType.setCorporateFeeAccount(oStringUtil.setDefaultValue("string", null));
 					oOmniAccountType.setFeePercentage(oStringUtil.setDefaultValue("string", null));
 					oOmniAccountType.setFeeTransactionCodes(oStringUtil.setDefaultValue("string", null));
 					oOmniAccountType.setNumberOfVirtualAccounts(
-							oStringUtil.setDefaultValue(accdata.get("NUMBEROFVIRTUALACCOUNTS"), null));
+							oStringUtil.setDefaultValue(accDataNode.get("NUMBEROFVIRTUALACCOUNTS"), null));
 					oOmniAccountType
-							.setLastUpdateTime(oStringUtil.setDefaultValue(accdata.get("LASTUPDATETIME"), null));
+							.setLastUpdateTime(oStringUtil.setDefaultValue(accDataNode.get("LASTUPDATETIME"), null));
 
 					List<AllowedTransactionFormatedType> oAllowedTransactionFormatedTypes = new ArrayList<>();
-					JsonNode transactionsNode = accdata.get("DALLOWEDTRNTYPESFORMATEDDISPLAY");
+					JsonNode transactionsNode = accDataNode.get("DALLOWEDTRNTYPESFORMATEDDISPLAY");
 
 					if (transactionsNode != null) {
-						for (JsonNode transactionNode : transactionsNode) {
+
+						for (JsonNode transaction : transactionsNode) {
+
 							AllowedTransactionFormatedType oOmniTransactions = new AllowedTransactionFormatedType();
 
-							oOmniTransactions
-									.setOrderBy(oStringUtil.setDefaultValue(transactionNode.get("ORDERBY"), null));
+							oOmniTransactions.setOrderBy(oStringUtil.setDefaultValue(transaction.get("ORDERBY"), null));
 							oOmniTransactions.setTransactionCode(
-									oStringUtil.setDefaultValue(transactionNode.get("TRANSACTIONCD"), null));
+									oStringUtil.setDefaultValue(transaction.get("TRANSACTIONCD"), null));
 							oOmniTransactions.setTransactionCodeDescription(
-									oStringUtil.setDefaultValue(transactionNode.get("TRANSACTIONNAME"), null));
-							oOmniTransactions.setIsSelected(
-									oStringUtil.setDefaultValue(transactionNode.get("ISSELECTED"), null));
+									oStringUtil.setDefaultValue(transaction.get("TRANSACTIONNAME"), null));
+							oOmniTransactions
+									.setIsSelected(oStringUtil.setDefaultValue(transaction.get("ISSELECTED"), null));
 
 							oAllowedTransactionFormatedTypes.add(oOmniTransactions);
 						}
@@ -216,7 +217,9 @@ public class CMSOmniAccountDetailsService {
 			oCMSOmniAccountDetails.setAccountDetailsResponse(oCmsOmniAccountDetailsResponse);
 
 			message.setBody(oCMSOmniAccountDetails);
+
 		} else {
+
 			String nativeDescription = oAccountUtils.getValueFromCMSResponse("DESCRIPTION", responseString);
 
 			message.setBody(oUtils.prepareFaultNodeStr("CMSOmniAccountDetailsResponse", "CMS", "", returncode,
