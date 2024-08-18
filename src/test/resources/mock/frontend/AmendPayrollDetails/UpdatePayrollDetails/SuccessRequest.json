@@ -1,0 +1,12 @@
+{
+  "PayrollDetailsAmendmentRequest": {
+    "accountId": "29488059145236",
+    "operationMode": "U",
+    "payrollFlagIndicator": "V",
+    "specialAccountIndicator": "8",
+    "payrollReleaseIndicator": "F",
+    "payrollExpiryDate": "00000000",
+    "payrollIssueDate": "00000000",
+    "siebalRequestNumber": "1010367777"
+  }
+}

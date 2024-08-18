@@ -197,6 +197,31 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!--<plugin>
+				<groupId>org.jsonschema2pojo</groupId>
+				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
+				<version>0.4.34</version>
+				<executions>
+					<execution>
+						<id>1</id>
+						<configuration>
+							<annotationStyle>jackson2</annotationStyle>
+							<includeAdditionalProperties>false</includeAdditionalProperties>
+
+							<sourceDirectory>${project.basedir}/src/main/resources/schema/apiregistry</sourceDirectory>
+
+							<targetPackage>
+								com.dh.middleware.account.models</targetPackage>
+							<sourceType>json</sourceType>
+						</configuration>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>-->
+			
 		</plugins>
 	</build>
 

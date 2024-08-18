@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication
 @ImportResource({ "classpath:spring/camel-context.xml" })
 @ComponentScan("com.dh.middleware.account.*")
 public class MidddlewareAccountApIsApplication {

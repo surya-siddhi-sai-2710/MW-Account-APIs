@@ -1,0 +1,13 @@
+{
+    "PayrollDetailsAmendmentResponse": {
+        "success": {
+            "accountId": "29488059119108",
+            "payrollFlagIndicator": "N",
+            "specialAccountIndicator": "1",
+            "payrollReleaseIndicator": "Y",
+            "payrollExpiryDate": "00000000",
+            "payrollIssueDate": "00000000",
+            "siebalRequestNumber": "null"
+        }
+    }
+}

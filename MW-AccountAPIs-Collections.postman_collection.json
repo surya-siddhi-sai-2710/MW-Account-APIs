@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "314f5219-ac0c-46fa-b0a1-3e637f0d8e03",
+		"name": "MW-AccountAPIs-Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30041423"
+	},
+	"item": [
+		{
+			"name": "AmendPayrollDetails",
+			"item": [
+				{
+					"name": "InquirePayrollDetails",
+					"item": [
+						{
+							"name": "AmendPayrollDetails_BANCSDB_Response",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"PayrollDetailsAmendmentRequest\": {\r\n    \"acctNum\": \"29488059119108\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8088/api/connector/db/bancsdb/v1/AmendInquirePayrollDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8088",
+									"path": [
+										"api",
+										"connector",
+										"db",
+										"bancsdb",
+										"v1",
+										"AmendInquirePayrollDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AmendPayrollDetails_Success_Response",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "ServiceHeader",
+										"value": "{\"tellerId\": \"T123\",\"branchId\": \"B001\",\"channelId\": \"WEB\"}",
+										"type": "text"
+									},
+									{
+										"key": "x-mock-match-request-body",
+										"value": "true",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"PayrollDetailsAmendmentRequest\": {\r\n    \"accountId\": \"29488059119108\",\r\n    \"operationMode\": \"R\",\r\n    \"payrollFlagIndicator\": \"N\",\r\n    \"specialAccountIndicator\": \"1\",\r\n    \"payrollReleaseIndicator\": \"Y\",\r\n    \"payrollExpiryDate\": \"00000000\",\r\n    \"payrollIssueDate\": \"00000000\",\r\n    \"siebalRequestNumber\": \"\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8086/api/accounts/v1/AmendPayrollDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"accounts",
+										"v1",
+										"AmendPayrollDetails"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UpdatePayrollDetails",
+					"item": [
+						{
+							"name": "AmendPayrollDetails_Fault_Response",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "ServiceHeader",
+										"value": "{\"tellerId\": \"T123\",\"branchId\": \"B001\",\"channelId\": \"WEB\"}",
+										"type": "text"
+									},
+									{
+										"key": "x-mock-match-request-body",
+										"value": "true",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"PayrollDetailsAmendmentRequest\": {\r\n    \"accountId\": \"29488059145238\",\r\n    \"operationMode\": \"U\",\r\n    \"payrollFlagIndicator\": \"V\",\r\n    \"specialAccountIndicator\": \"8\",\r\n    \"payrollReleaseIndicator\": \"F\",\r\n    \"payrollExpiryDate\": \"00000000\",\r\n    \"payrollIssueDate\": \"00000000\",\r\n    \"siebalRequestNumber\": \"1010367777\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8086/api/accounts/v1/AmendPayrollDetails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"api",
+										"accounts",
+										"v1",
+										"AmendPayrollDetails"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AmendPayrollDetails_FaultResponse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ServiceHeader",
+								"value": "{\"tellerId\": \"T123\",\"branchId\": \"B001\",\"channelId\": \"WEB\"}",
+								"type": "text"
+							},
+							{
+								"key": "x-mock-match-request-body",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"PayrollDetailsAmendmentRequest\": {\r\n    \"accountId\": \"29488059119108\",\r\n    \"operationMode\": \"E\",\r\n    \"payrollFlagIndicator\": \"N\",\r\n    \"specialAccountIndicator\": \"1\",\r\n    \"payrollReleaseIndicator\": \"Y\",\r\n    \"payrollExpiryDate\": \"00000000\",\r\n    \"payrollIssueDate\": \"00000000\",\r\n    \"siebalRequestNumber\": \"\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/api/accounts/v1/AmendPayrollDetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"api",
+								"accounts",
+								"v1",
+								"AmendPayrollDetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
