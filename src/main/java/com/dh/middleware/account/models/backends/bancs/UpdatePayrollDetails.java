@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "PayrollDetailsAmendmentRequest"
 })
-public class UpdatePayrollDetails_007089 {
+public class UpdatePayrollDetails {
 	
 	@JsonProperty("Transaction")
 	protected PayrollDetailsAmendmentRequestTypeBknd transaction;
@@ -23,7 +23,7 @@ public class UpdatePayrollDetails_007089 {
 
 	@Override
 	public String toString() {
-		return "UpdatePayrollDetails_007089 [transaction=" + transaction + "]";
+		return "UpdatePayrollDetails [transaction=" + transaction + "]";
 	}	
 	
 }

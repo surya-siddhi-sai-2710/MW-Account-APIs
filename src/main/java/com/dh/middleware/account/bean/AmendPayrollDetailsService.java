@@ -16,7 +16,7 @@ import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentRe
 import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentResponseTypeBknd;
 import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentResponseBknd;
 import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentRequestBknd;
-import com.dh.middleware.account.models.backends.bancs.UpdatePayrollDetails_007089;
+import com.dh.middleware.account.models.backends.bancs.UpdatePayrollDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -80,7 +80,7 @@ public class AmendPayrollDetailsService {
 		return oPayrollDetailsAmendmentRequestBknd;
 	}
 	
-	public PayrollDetailsAmendmentResponseBknd prepareInquirePayrollBancsResponse(@Body JsonNode body, Exchange ex) throws Exception{
+	public AmendmentPayrollDetails prepareInquirePayrollResponse(@Body JsonNode body, Exchange ex) throws Exception{
 		
 		JsonNode InquirePayrollDetailsNode = body.get("PayrollDetailsAmendmentResponse");
 		
@@ -98,36 +98,36 @@ public class AmendPayrollDetailsService {
 		
 		oInquirePayrollDetails.setTransaction(oTransaction);
 		
-		return oInquirePayrollDetails;
-		
-	}
-	
-	public  AmendmentPayrollDetails prepareInquirePayrollDetailsResponse(PayrollDetailsAmendmentResponseBknd response) throws Exception{
-		
 		AmendmentPayrollDetails amendmentPayrollDetails = new AmendmentPayrollDetails();
 		
 		PayrollDetailsAmendmentResponse amendmentResponse = new PayrollDetailsAmendmentResponse();
 		Success success = new Success();
 		
-		success.setAccountId(response.getTransaction().getAcctNum());
-		success.setPayrollFlagIndicator(response.getTransaction().getPayrollFlagInd());
-		success.setSpecialAccountIndicator(response.getTransaction().getSplAcctInd());
-		success.setPayrollReleaseIndicator(response.getTransaction().getPayrollReleInd());
-		success.setPayrollExpiryDate(response.getTransaction().getExpDt());
-		success.setPayrollIssueDate(response.getTransaction().getIssueDt());
-		success.setSiebalRequestNumber(response.getTransaction().getSiebalReqNo());
+		success.setAccountId(oInquirePayrollDetails.getTransaction().getAcctNum());
+		success.setPayrollFlagIndicator(oInquirePayrollDetails.getTransaction().getPayrollFlagInd());
+		success.setSpecialAccountIndicator(oInquirePayrollDetails.getTransaction().getSplAcctInd());
+		success.setPayrollReleaseIndicator(oInquirePayrollDetails.getTransaction().getPayrollReleInd());
+		success.setPayrollExpiryDate(oInquirePayrollDetails.getTransaction().getExpDt());
+		success.setPayrollIssueDate(oInquirePayrollDetails.getTransaction().getIssueDt());
+		success.setSiebalRequestNumber(oInquirePayrollDetails.getTransaction().getSiebalReqNo());
 		
 		amendmentResponse.setSuccess(success);
 		amendmentPayrollDetails.setPayrollDetailsAmendmentResponse(amendmentResponse);
 		
 		return amendmentPayrollDetails;
-
 		
 	}
 	
-	public UpdatePayrollDetails_007089 prepareUpdatePayrollDetails(Exchange ex) throws Exception{
+//	public  AmendmentPayrollDetails prepareInquirePayrollDetailsResponse(PayrollDetailsAmendmentResponseBknd response) throws Exception{
+//		
+//		
+//
+//		
+//	}
+	
+	public UpdatePayrollDetails prepareUpdatePayrollDetails(Exchange ex) throws Exception{
 		
-		UpdatePayrollDetails_007089 updatePayrollDetails = new UpdatePayrollDetails_007089();
+		UpdatePayrollDetails updatePayrollDetails = new UpdatePayrollDetails();
 		
 		PayrollDetailsAmendmentRequestTypeBknd transaction = new PayrollDetailsAmendmentRequestTypeBknd();
 		
@@ -151,7 +151,6 @@ public class AmendPayrollDetailsService {
 		PayrollDetailsAmendmentResponse amendmentResponse = new PayrollDetailsAmendmentResponse();
 		Success success = new Success();
 		
-		success.setAccountId(oPayrollDetailsAmendmentRequest.getAccountId());
 		
 		amendmentResponse.setSuccess(success);
 		amendmentPayrollDetails.setPayrollDetailsAmendmentResponse(amendmentResponse);

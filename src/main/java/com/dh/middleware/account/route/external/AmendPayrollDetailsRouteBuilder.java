@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.dh.middleware.account.models.AmendmentPayrollDetails;
 import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentRequestTypeBknd;
 import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentRequestBknd;
-import com.dh.middleware.account.models.backends.bancs.UpdatePayrollDetails_007089;
+import com.dh.middleware.account.models.backends.bancs.UpdatePayrollDetails;
 
 
 @Component
@@ -42,39 +42,38 @@ public class AmendPayrollDetailsRouteBuilder extends RouteBuilder{
 				.to("direct:getUpdatePayrollDetails")
 			
 			.otherwise()
-				.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"MANDATORYVALUE\",\"\",\"\",\"\",\"sysOrAppWithoutBkndError\",${exchange})");
+				.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"MANDATORYVALUE\",\"Invalid Operational Mode\",\"\",\"\",\"validationsCust\",${exchange})");
 			
 		from("direct:getInquirePayrollDetails")
 			.to("bean:amendPayrollDetailsService?method=prepareInquirePayrollDetails")
 
 			.marshal(new JacksonDataFormat(PayrollDetailsAmendmentRequestBknd.class))
 
-			.setHeader("system",constant("BANCS"))
+			.setHeader("system",constant("BANCSDB"))
 			.to("{{BANCSDBConnector.host}}{{BANCSDBConnector.contextPath}}"+"/v1/AmendInquirePayrollDetails?bridgeEndpoint=true")
 					
 			.choice()
-				.when().simple("${body} != null")
-						.to("bean:amendPayrollDetailsService?method=prepareInquirePayrollBancsResponse")
-						.to("bean:amendPayrollDetailsService?method=prepareInquirePayrollDetailsResponse")
-						.setHeader("Content-Type", constant("application/json"))
-					
+//				.when().simple("${body} contains 'fault'")
+				.when().jsonpath("$.PayrollDetailsAmendmentResponse[?(@.ERROR != null && @.ERROR.size()>0)]")
+						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDBERROR\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
 				.otherwise()
-						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"RECORDNOTFOUND\",\"\",\"\",\"\",\"sysOrAppWithoutBkndError\",${exchange})")
+						.to("bean:amendPayrollDetailsService?method=prepareInquirePayrollResponse")
 			.endChoice();
 
 		from("direct:getUpdatePayrollDetails")
 			.to("bean:amendPayrollDetailsService?method=prepareUpdatePayrollDetails")
 				
-			.marshal(new JacksonDataFormat(UpdatePayrollDetails_007089.class))
+			.marshal(new JacksonDataFormat(UpdatePayrollDetails.class))
 
-			.setHeader("system",constant("BANCS"))
+			.setHeader("system",constant("BANCSDB"))
 			.to("{{BANCSDBConnector.host}}{{BANCSDBConnector.contextPath}}"+"/v1/AmendUpdatePayrollDetails?bridgeEndpoint=true")
+
 			.choice()
-					.when().jsonpath("$.PayrollDetailsAmendmentResponse['success']['update']")
+				.when().jsonpath("$.PayrollDetailsAmendmentResponse[?(@.ERROR != null && @.ERROR.size()>0)]")
+						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDBERROR\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
+
+				.otherwise()
 						.to("bean:amendPayrollDetailsService?method=prepareUpdatePayrollDetailsResponse")
-						.setHeader("Content-Type", constant("application/json"))
-					.otherwise()
-						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"RECORDNOTFOUND\",\"\",\"\",\"\",\"sysOrAppWithoutBkndError\",${exchange})")
 			.endChoice();
 		
 		

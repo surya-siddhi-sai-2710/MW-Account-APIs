@@ -74,7 +74,9 @@ public class BANCSDBConnectorImplDao {
 
 			// checking weather the requested data is retrieved or not
 			if (amendmentPayrollDetails.size() < 1) {
-				return null;
+				ObjectNode oFault = oAmendmentPayrollDetailsNode.putObject("ERROR");
+				oFault.put("fault", "ERROR");
+				return amendmentPayrollDetails;
 			} else {
 				return amendmentPayrollDetails;
 			}
@@ -140,15 +142,22 @@ public class BANCSDBConnectorImplDao {
 			ObjectNode oPayrollDetailsAmendmentResponseNode = JsonNodeFactory.instance.objectNode();
 			ObjectNode oPayrollDetailsAmendmentResponse = oPayrollDetailsAmendmentResponseNode
 					.putObject("PayrollDetailsAmendmentResponse");
-			ObjectNode oStatus = oPayrollDetailsAmendmentResponse.putObject("success");
+			
 
 			if (rowsAffected > 0) {
-				oStatus.put("update", true);
+				ObjectNode oStatus = oPayrollDetailsAmendmentResponse.putObject("success");
+				oStatus.put("update", "Success");
+				return oPayrollDetailsAmendmentResponseNode;
+				
 			} else {
-				oStatus.put("update", false);
+				
+				ObjectNode oFault = oPayrollDetailsAmendmentResponse.putObject("ERROR");
+				oFault.put("update", "ERROR");
+				return oPayrollDetailsAmendmentResponseNode;
+				
 			}
-
-			return oPayrollDetailsAmendmentResponseNode;
+			
+			
 
 		} catch (Exception e) {
 			// TODO: handle exception
