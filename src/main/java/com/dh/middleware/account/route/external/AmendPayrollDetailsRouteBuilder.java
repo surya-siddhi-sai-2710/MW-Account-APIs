@@ -6,7 +6,6 @@ import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
 import com.dh.middleware.account.models.AmendmentPayrollDetails;
-import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentRequestTypeBknd;
 import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentRequestBknd;
 import com.dh.middleware.account.models.backends.bancs.UpdatePayrollDetails;
 
@@ -53,7 +52,6 @@ public class AmendPayrollDetailsRouteBuilder extends RouteBuilder{
 			.to("{{BANCSDBConnector.host}}{{BANCSDBConnector.contextPath}}"+"/v1/AmendInquirePayrollDetails?bridgeEndpoint=true")
 					
 			.choice()
-//				.when().simple("${body} contains 'fault'")
 				.when().jsonpath("$.PayrollDetailsAmendmentResponse[?(@.ERROR.size()>0)]")
 						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDBERROR\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
 				.otherwise()

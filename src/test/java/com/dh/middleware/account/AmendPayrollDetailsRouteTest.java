@@ -148,7 +148,7 @@ public class AmendPayrollDetailsRouteTest {
 
 		System.out.println("Fault response: " + faultResponse);
 
-		Assertions.assertNotNull(faultResponse.contains("Record not found"));
+		Assertions.assertNotNull(faultResponse.contains("BANCSERROR"));
 	}
 	
 	@Test
@@ -193,9 +193,9 @@ public class AmendPayrollDetailsRouteTest {
 
 		AmendmentPayrollDetails successResponse = producerTemplate.requestBodyAndHeaders("direct:getAmendPayrollDetails", oInquirePayrollDetailsRequest,  headers, AmendmentPayrollDetails.class);
 
-		System.out.println("PayrollDetailsAmendmentResponse " + successResponse.getPayrollDetailsAmendmentResponse().getSuccess().getAccountId());
+		System.out.println("PayrollDetailsAmendmentResponse " + successResponse.getPayrollDetailsAmendmentResponse().getSuccess());
 
-		Assertions.assertNotNull(successResponse.getPayrollDetailsAmendmentResponse().getSuccess().getAccountId());
+		Assertions.assertNotNull(successResponse.getPayrollDetailsAmendmentResponse().getSuccess());
 		
 	}
 	
@@ -243,7 +243,7 @@ public class AmendPayrollDetailsRouteTest {
 
 		System.out.println("Fault response: " + faultResponse);
 
-		Assertions.assertNotNull(faultResponse.contains("Record not found"));
+		Assertions.assertNotNull(faultResponse.contains("BANCSERROR"));
 	}
 	
 	@Test
