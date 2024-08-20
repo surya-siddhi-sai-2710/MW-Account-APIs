@@ -118,12 +118,6 @@ public class AmendPayrollDetailsService {
 		
 	}
 	
-//	public  AmendmentPayrollDetails prepareInquirePayrollDetailsResponse(PayrollDetailsAmendmentResponseBknd response) throws Exception{
-//		
-//		
-//
-//		
-//	}
 	
 	public UpdatePayrollDetails prepareUpdatePayrollDetails(Exchange ex) throws Exception{
 		
