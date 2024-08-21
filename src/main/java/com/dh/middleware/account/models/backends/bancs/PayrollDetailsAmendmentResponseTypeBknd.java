@@ -1,3 +1,4 @@
+
 package com.dh.middleware.account.models.backends.bancs;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -5,91 +6,115 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+    "ACCOUNTID",
+    "PAYROLLFLAGINDICATOR",
+    "SPECIALACCOUNTINDICATOR",
+    "PAYROLLRELEASEINDICATOR",
+    "PAYROLLEXPIRYDATE",
+    "PAYROLLISSUEDATE",
+    "SIEBALREQUESTNUMBER"
+})
 public class PayrollDetailsAmendmentResponseTypeBknd {
 
-	@JsonProperty("acctNum")
-	protected String acctNum;
+	@JsonProperty("ACCOUNTID")
+	private String aCCOUNTID;
 	
-	@JsonProperty("payrollFlagInd")
-	protected String payrollFlagInd;
+	@JsonProperty("PAYROLLFLAGINDICATOR")
+	private String pAYROLLFLAGINDICATOR;
 	
-	@JsonProperty("splAcctInd")
-	protected String splAcctInd;
+	@JsonProperty("SPECIALACCOUNTINDICATOR")
+	private String sPECIALACCOUNTINDICATOR;
 	
-	@JsonProperty("payrollReleInd")
-	protected String payrollReleInd;
+	@JsonProperty("PAYROLLRELEASEINDICATOR")
+	private String pAYROLLRELEASEINDICATOR;
 	
-	@JsonProperty("expDt")
-	protected String expDt;
+	@JsonProperty("PAYROLLEXPIRYDATE")
+	private String pAYROLLEXPIRYDATE;
 	
-	@JsonProperty("issueDt")
-	protected String issueDt;
+	@JsonProperty("PAYROLLISSUEDATE")
+	private String pAYROLLISSUEDATE;
 	
-	@JsonProperty("siebalReqNo")
-	protected String siebalReqNo;
+	@JsonProperty("SIEBALREQUESTNUMBER")
+	private String sIEBALREQUESTNUMBER;
 
-	public String getAcctNum() {
-		return acctNum;
+	@JsonProperty("ACCOUNTID")
+	public String getACCOUNTID() {
+		return aCCOUNTID;
 	}
 
-	public void setAcctNum(String acctNum) {
-		this.acctNum = acctNum;
+	@JsonProperty("ACCOUNTID")
+	public void setACCOUNTID(String aCCOUNTID) {
+		this.aCCOUNTID = aCCOUNTID;
 	}
 
-	public String getPayrollFlagInd() {
-		return payrollFlagInd;
+	@JsonProperty("PAYROLLFLAGINDICATOR")
+	public String getPAYROLLFLAGINDICATOR() {
+		return pAYROLLFLAGINDICATOR;
 	}
 
-	public void setPayrollFlagInd(String payrollFlagInd) {
-		this.payrollFlagInd = payrollFlagInd;
+	@JsonProperty("PAYROLLFLAGINDICATOR")
+	public void setPAYROLLFLAGINDICATOR(String pAYROLLFLAGINDICATOR) {
+		this.pAYROLLFLAGINDICATOR = pAYROLLFLAGINDICATOR;
 	}
 
-	public String getSplAcctInd() {
-		return splAcctInd;
-	}
+	@JsonProperty("SPECIALACCOUNTINDICATOR")
+    public String getSPECIALACCOUNTINDICATOR() {
+        return sPECIALACCOUNTINDICATOR;
+    }
 
-	public void setSplAcctInd(String splAcctInd) {
-		this.splAcctInd = splAcctInd;
-	}
+    @JsonProperty("SPECIALACCOUNTINDICATOR")
+    public void setSPECIALACCOUNTINDICATOR(String sPECIALACCOUNTINDICATOR) {
+        this.sPECIALACCOUNTINDICATOR = sPECIALACCOUNTINDICATOR;
+    }
 
-	public String getPayrollReleInd() {
-		return payrollReleInd;
-	}
+    @JsonProperty("PAYROLLRELEASEINDICATOR")
+    public String getPAYROLLRELEASEINDICATOR() {
+        return pAYROLLRELEASEINDICATOR;
+    }
 
-	public void setPayrollReleInd(String payrollReleInd) {
-		this.payrollReleInd = payrollReleInd;
-	}
+    @JsonProperty("PAYROLLRELEASEINDICATOR")
+    public void setPAYROLLRELEASEINDICATOR(String pAYROLLRELEASEINDICATOR) {
+        this.pAYROLLRELEASEINDICATOR = pAYROLLRELEASEINDICATOR;
+    }
 
-	public String getExpDt() {
-		return expDt;
-	}
+    @JsonProperty("PAYROLLEXPIRYDATE")
+    public String getPAYROLLEXPIRYDATE() {
+        return pAYROLLEXPIRYDATE;
+    }
 
-	public void setExpDt(String expDt) {
-		this.expDt = expDt;
-	}
+    @JsonProperty("PAYROLLEXPIRYDATE")
+    public void setPAYROLLEXPIRYDATE(String pAYROLLEXPIRYDATE) {
+        this.pAYROLLEXPIRYDATE = pAYROLLEXPIRYDATE;
+    }
 
-	public String getIssueDt() {
-		return issueDt;
-	}
+    @JsonProperty("PAYROLLISSUEDATE")
+    public String getPAYROLLISSUEDATE() {
+        return pAYROLLISSUEDATE;
+    }
 
-	public void setIssueDt(String issueDt) {
-		this.issueDt = issueDt;
-	}
+    @JsonProperty("PAYROLLISSUEDATE")
+    public void setPAYROLLISSUEDATE(String pAYROLLISSUEDATE) {
+        this.pAYROLLISSUEDATE = pAYROLLISSUEDATE;
+    }
 
-	public String getSiebalReqNo() {
-		return siebalReqNo;
-	}
+    @JsonProperty("SIEBALREQUESTNUMBER")
+    public String getSIEBALREQUESTNUMBER() {
+        return sIEBALREQUESTNUMBER;
+    }
 
-	public void setSiebalReqNo(String siebalReqNo) {
-		this.siebalReqNo = siebalReqNo;
-	}
+    @JsonProperty("SIEBALREQUESTNUMBER")
+    public void setSIEBALREQUESTNUMBER(String sIEBALREQUESTNUMBER) {
+        this.sIEBALREQUESTNUMBER = sIEBALREQUESTNUMBER;
+    }
 
 	@Override
 	public String toString() {
-		return "PayrollDetailsAmendmentResponseType [acctNum=" + acctNum + ", payrollFlagInd=" + payrollFlagInd
-				+ ", splAcctInd=" + splAcctInd + ", payrollReleInd=" + payrollReleInd + ", expDt=" + expDt
-				+ ", issueDt=" + issueDt + ", siebalReqNo=" + siebalReqNo + "]";
+		return "PayrollDetailsAmendmentResponseTypeBknd [aCCOUNTID=" + aCCOUNTID + ", pAYROLLFLAGINDICATOR="
+				+ pAYROLLFLAGINDICATOR + ", sPECIALACCOUNTINDICATOR=" + sPECIALACCOUNTINDICATOR
+				+ ", pAYROLLRELEASEINDICATOR=" + pAYROLLRELEASEINDICATOR + ", pAYROLLEXPIRYDATE=" + pAYROLLEXPIRYDATE
+				+ ", pAYROLLISSUEDATE=" + pAYROLLISSUEDATE + ", sIEBALREQUESTNUMBER=" + sIEBALREQUESTNUMBER + "]";
 	}
-	
-	
+
+    
 }

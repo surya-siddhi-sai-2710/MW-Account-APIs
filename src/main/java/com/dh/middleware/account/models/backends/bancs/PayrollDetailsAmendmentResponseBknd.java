@@ -1,32 +1,35 @@
+
 package com.dh.middleware.account.models.backends.bancs;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "PayrollDetailsAmendmentReponse"
+    "PayrollDetailsAmendmentResponse"
 })
 public class PayrollDetailsAmendmentResponseBknd {
 
-	@JsonProperty("Transaction")
-	protected PayrollDetailsAmendmentResponseTypeBknd transaction;
+    @JsonProperty("PayrollDetailsAmendmentResponse")
+    private PayrollDetailsAmendmentResponseTypeBknd payrollDetailsAmendmentResponse;
 
-	public PayrollDetailsAmendmentResponseTypeBknd getTransaction() {
-		return transaction;
-	}
+    @JsonProperty("PayrollDetailsAmendmentResponse")
+    public PayrollDetailsAmendmentResponseTypeBknd getPayrollDetailsAmendmentResponse() {
+        return payrollDetailsAmendmentResponse;
+    }
 
-	public void setTransaction(PayrollDetailsAmendmentResponseTypeBknd transaction) {
-		this.transaction = transaction;
-	}
+    @JsonProperty("PayrollDetailsAmendmentResponse")
+    public void setPayrollDetailsAmendmentResponse(PayrollDetailsAmendmentResponseTypeBknd payrollDetailsAmendmentResponse) {
+        this.payrollDetailsAmendmentResponse = payrollDetailsAmendmentResponse;
+    }
 
 	@Override
 	public String toString() {
-		return "InquirePayrollDetails_007088_007089Response [transaction=" + transaction + "]";
+		return "PayrollDetailsAmendmentResponseBknd [payrollDetailsAmendmentResponse=" + payrollDetailsAmendmentResponse
+				+ "]";
 	}
 
-	
-	
+    
+
 }

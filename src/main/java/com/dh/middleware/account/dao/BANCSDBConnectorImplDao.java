@@ -9,14 +9,12 @@ import java.sql.Types;
 
 import javax.sql.DataSource;
 
-import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.camel.language.simple.Simple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -57,8 +55,7 @@ public class BANCSDBConnectorImplDao {
 			int noOfColumns = rsMetadata.getColumnCount();
 
 			ObjectNode amendmentPayrollDetails = JsonNodeFactory.instance.objectNode();
-			ObjectNode oAmendmentPayrollDetailsNode = amendmentPayrollDetails
-					.putObject("PayrollDetailsAmendmentResponse");
+			ObjectNode oAmendmentPayrollDetailsNode = amendmentPayrollDetails.putObject("PayrollDetailsAmendmentResponse");
 			
 			while (rs.next()) {
 
@@ -71,16 +68,16 @@ public class BANCSDBConnectorImplDao {
 
 				}
 			}
-
+			
 			// checking weather the requested data is retrieved or not
-			if (amendmentPayrollDetails.size() < 1) {
+			if (oAmendmentPayrollDetailsNode.size() < 1) {
+				
 				ObjectNode oFault = oAmendmentPayrollDetailsNode.putObject("ERROR");
 				oFault.put("fault", "ERROR");
-				return amendmentPayrollDetails;
-			} else {
-				return amendmentPayrollDetails;
+	
 			}
-
+				return amendmentPayrollDetails;
+				
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

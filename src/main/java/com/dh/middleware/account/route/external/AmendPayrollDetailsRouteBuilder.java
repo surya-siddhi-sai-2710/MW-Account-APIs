@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.dh.middleware.account.models.AmendmentPayrollDetails;
 import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentRequestBknd;
+import com.dh.middleware.account.models.backends.bancs.PayrollDetailsAmendmentResponseBknd;
 import com.dh.middleware.account.models.backends.bancs.UpdatePayrollDetails;
 
 
@@ -44,22 +45,22 @@ public class AmendPayrollDetailsRouteBuilder extends RouteBuilder{
 				.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"MANDATORYVALUE\",\"Invalid Operational Mode\",\"\",\"\",\"validationsCust\",${exchange})");
 			
 		from("direct:getInquirePayrollDetails")
-			.to("bean:amendPayrollDetailsService?method=prepareInquirePayrollDetails")
+			.to("bean:amendPayrollDetailsService?method=setInquirePayrollDetailsRequestIn")
 
 			.marshal(new JacksonDataFormat(PayrollDetailsAmendmentRequestBknd.class))
 
 			.setHeader("system",constant("BANCSDB"))
 			.to("{{BANCSDBConnector.host}}{{BANCSDBConnector.contextPath}}"+"/v1/AmendInquirePayrollDetails?bridgeEndpoint=true")
-					
 			.choice()
 				.when().jsonpath("$.PayrollDetailsAmendmentResponse[?(@.ERROR.size()>0)]")
 						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDB\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
 				.otherwise()
-						.to("bean:amendPayrollDetailsService?method=prepareInquirePayrollResponse")
+						.unmarshal(new JacksonDataFormat(PayrollDetailsAmendmentResponseBknd.class))
+						.to("bean:amendPayrollDetailsService?method=setInquirePayrollResponseOut")
 			.endChoice();
 
 		from("direct:getUpdatePayrollDetails")
-			.to("bean:amendPayrollDetailsService?method=prepareUpdatePayrollDetails")
+			.to("bean:amendPayrollDetailsService?method=setUpdatePayrollDetailsRequestIn")
 				
 			.marshal(new JacksonDataFormat(UpdatePayrollDetails.class))
 
@@ -71,7 +72,7 @@ public class AmendPayrollDetailsRouteBuilder extends RouteBuilder{
 						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDB\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
 
 				.otherwise()
-						.to("bean:amendPayrollDetailsService?method=prepareUpdatePayrollDetailsResponse")
+						.to("bean:amendPayrollDetailsService?method=setUpdatePayrollDetailsResponseOut")
 			.endChoice();
 		
 		

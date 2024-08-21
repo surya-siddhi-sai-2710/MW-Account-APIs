@@ -1,13 +1,11 @@
 {
-	"PayrollDetailsAmendmentResponse": {
-		"success": {
-			"accountId": "",
-			"payrollFlagIndicator": "s",
-			"specialAccountIndicator": "s",
-			"payrollReleaseIndicator": "s",
-			"payrollExpiryDate": "69158081",
-			"payrollIssueDate": "24721592",
-			"siebalRequestNumber": "string"
-		}
-	}
+    "PayrollDetailsAmendmentResponse": {
+        "ACCOUNTID": "29488059119108",
+        "PAYROLLFLAGINDICATOR": "N",
+        "SPECIALACCOUNTINDICATOR": "1",
+        "PAYROLLRELEASEINDICATOR": "Y",
+        "PAYROLLEXPIRYDATE": "00000000",
+        "PAYROLLISSUEDATE": "00000000",
+        "SIEBALREQUESTNUMBER": null
+    }
 }

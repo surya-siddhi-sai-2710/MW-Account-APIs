@@ -67,7 +67,7 @@ public class AmendPayrollDetailsService {
 	}
 
 	
-	public PayrollDetailsAmendmentRequestBknd prepareInquirePayrollDetails(Exchange ex) throws Exception{
+	public PayrollDetailsAmendmentRequestBknd setInquirePayrollDetailsRequestIn(Exchange ex) throws Exception{
 		
 		PayrollDetailsAmendmentRequestBknd oPayrollDetailsAmendmentRequestBknd = new PayrollDetailsAmendmentRequestBknd();
 		
@@ -80,36 +80,21 @@ public class AmendPayrollDetailsService {
 		return oPayrollDetailsAmendmentRequestBknd;
 	}
 	
-	public AmendmentPayrollDetails prepareInquirePayrollResponse(@Body JsonNode body, Exchange ex) throws Exception{
-		
-		JsonNode InquirePayrollDetailsNode = body.get("PayrollDetailsAmendmentResponse");
-		
-		PayrollDetailsAmendmentResponseBknd oInquirePayrollDetails = new PayrollDetailsAmendmentResponseBknd();
-		
-		PayrollDetailsAmendmentResponseTypeBknd oTransaction = new PayrollDetailsAmendmentResponseTypeBknd();
-		
-		oTransaction.setAcctNum(InquirePayrollDetailsNode.get("ACCOUNTID").asText());
-		oTransaction.setPayrollFlagInd(InquirePayrollDetailsNode.get("PAYROLLFLAGINDICATOR").asText());
-		oTransaction.setSplAcctInd(InquirePayrollDetailsNode.get("SPECIALACCOUNTINDICATOR").asText());
-		oTransaction.setPayrollReleInd(InquirePayrollDetailsNode.get("PAYROLLRELEASEINDICATOR").asText());
-		oTransaction.setExpDt(InquirePayrollDetailsNode.get("PAYROLLEXPIRYDATE").asText());
-		oTransaction.setIssueDt(InquirePayrollDetailsNode.get("PAYROLLISSUEDATE").asText());
-		oTransaction.setSiebalReqNo(InquirePayrollDetailsNode.get("SIEBALREQUESTNUMBER").asText());
-		
-		oInquirePayrollDetails.setTransaction(oTransaction);
+	public AmendmentPayrollDetails setInquirePayrollResponseOut(PayrollDetailsAmendmentResponseBknd amendmentResponseBknd) throws Exception{
+
 		
 		AmendmentPayrollDetails amendmentPayrollDetails = new AmendmentPayrollDetails();
 		
 		PayrollDetailsAmendmentResponse amendmentResponse = new PayrollDetailsAmendmentResponse();
 		Success success = new Success();
 		
-		success.setAccountId(oInquirePayrollDetails.getTransaction().getAcctNum());
-		success.setPayrollFlagIndicator(oInquirePayrollDetails.getTransaction().getPayrollFlagInd());
-		success.setSpecialAccountIndicator(oInquirePayrollDetails.getTransaction().getSplAcctInd());
-		success.setPayrollReleaseIndicator(oInquirePayrollDetails.getTransaction().getPayrollReleInd());
-		success.setPayrollExpiryDate(oInquirePayrollDetails.getTransaction().getExpDt());
-		success.setPayrollIssueDate(oInquirePayrollDetails.getTransaction().getIssueDt());
-		success.setSiebalRequestNumber(oInquirePayrollDetails.getTransaction().getSiebalReqNo());
+		success.setAccountId(oStringUtil.setDefaultValue(amendmentResponseBknd.getPayrollDetailsAmendmentResponse().getACCOUNTID(),""));
+		success.setPayrollFlagIndicator(amendmentResponseBknd.getPayrollDetailsAmendmentResponse().getPAYROLLFLAGINDICATOR());
+		success.setSpecialAccountIndicator(amendmentResponseBknd.getPayrollDetailsAmendmentResponse().getSPECIALACCOUNTINDICATOR());
+		success.setPayrollReleaseIndicator(amendmentResponseBknd.getPayrollDetailsAmendmentResponse().getPAYROLLRELEASEINDICATOR());
+		success.setPayrollExpiryDate(amendmentResponseBknd.getPayrollDetailsAmendmentResponse().getPAYROLLEXPIRYDATE());
+		success.setPayrollIssueDate(amendmentResponseBknd.getPayrollDetailsAmendmentResponse().getPAYROLLISSUEDATE());
+		success.setSiebalRequestNumber(amendmentResponseBknd.getPayrollDetailsAmendmentResponse().getSIEBALREQUESTNUMBER());
 		
 		amendmentResponse.setSuccess(success);
 		amendmentPayrollDetails.setPayrollDetailsAmendmentResponse(amendmentResponse);
@@ -119,7 +104,7 @@ public class AmendPayrollDetailsService {
 	}
 	
 	
-	public UpdatePayrollDetails prepareUpdatePayrollDetails(Exchange ex) throws Exception{
+	public UpdatePayrollDetails setUpdatePayrollDetailsRequestIn(Exchange ex) throws Exception{
 		
 		UpdatePayrollDetails updatePayrollDetails = new UpdatePayrollDetails();
 		
@@ -138,7 +123,7 @@ public class AmendPayrollDetailsService {
 		
 	}
 	
-	public AmendmentPayrollDetails prepareUpdatePayrollDetailsResponse(Exchange ex) throws Exception{
+	public AmendmentPayrollDetails setUpdatePayrollDetailsResponseOut(Exchange ex) throws Exception{
 		
 		AmendmentPayrollDetails amendmentPayrollDetails = new AmendmentPayrollDetails();
 		
