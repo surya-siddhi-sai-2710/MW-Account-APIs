@@ -111,7 +111,7 @@ public class AmendPayrollDetailsRouteTest {
 				Resources.getResource("mock/frontend/AmendPayrollDetails/InquirePayrollDetails/FaultRequest.json"), Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
-				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
+				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_SystemErrors.json"),
 				Charsets.UTF_8);
 
 		String inquirePayrollDetailsResponse = Resources.toString(
@@ -148,7 +148,7 @@ public class AmendPayrollDetailsRouteTest {
 
 		System.out.println("Fault response: " + faultResponse);
 
-		Assertions.assertNotNull(faultResponse.contains("BANCSERROR"));
+		Assertions.assertNotNull(faultResponse.contains("BANCSDB"));
 	}
 	
 	@Test
@@ -206,7 +206,7 @@ public class AmendPayrollDetailsRouteTest {
 				Resources.getResource("mock/frontend/AmendPayrollDetails/UpdatePayrollDetails/FaultRequest.json"), Charsets.UTF_8);
 
 		String ApplicationErrorConfigStore = Resources.toString(
-				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_ApplicationErrors.json"),
+				Resources.getResource("mock/backend/configStore/ConfigStoreResponse_Errors_SystemErrors.json"),
 				Charsets.UTF_8);
 
 		String inquirePayrollDetailsResponse = Resources.toString(
@@ -243,7 +243,7 @@ public class AmendPayrollDetailsRouteTest {
 
 		System.out.println("Fault response: " + faultResponse);
 
-		Assertions.assertNotNull(faultResponse.contains("BANCSERROR"));
+		Assertions.assertNotNull(faultResponse.contains("BANCSDB"));
 	}
 	
 	@Test
