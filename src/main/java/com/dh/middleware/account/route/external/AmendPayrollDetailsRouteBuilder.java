@@ -53,7 +53,7 @@ public class AmendPayrollDetailsRouteBuilder extends RouteBuilder{
 					
 			.choice()
 				.when().jsonpath("$.PayrollDetailsAmendmentResponse[?(@.ERROR.size()>0)]")
-						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDBERROR\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
+						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDB\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
 				.otherwise()
 						.to("bean:amendPayrollDetailsService?method=prepareInquirePayrollResponse")
 			.endChoice();
@@ -68,7 +68,7 @@ public class AmendPayrollDetailsRouteBuilder extends RouteBuilder{
 
 			.choice()
 				.when().jsonpath("$.PayrollDetailsAmendmentResponse[?(@.ERROR.size()>0)]")
-						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDBERROR\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
+						.to("bean:oUtils?method=prepareFaultNodeStr(\"PayrollDetailsAmendmentResponse\",\"BANCSDB\",\"\",\"\",\"\",\"sysOrAppWithBkndError\",${exchange})")
 
 				.otherwise()
 						.to("bean:amendPayrollDetailsService?method=prepareUpdatePayrollDetailsResponse")
